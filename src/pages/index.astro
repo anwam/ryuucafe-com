@@ -3,6 +3,7 @@ import { Image, Picture } from "astro:assets";
 import { type Product } from "../types";
 import Header from "../components/Header.astro";
 import ProductItem from "../components/ProductItem.astro";
+import Footer from "@/components/Footer.astro";
 
 const response = await fetch("https://graphql.datocms.com/", {
   method: "POST",
@@ -63,69 +64,14 @@ const products = json.data.allProducts;
       </p>
       <ul class="grid grid-cols-3 grid-flow-row gap-4">
         {
-          products.map((product) => (
+          products.map((product, index) => (
             <li class="col-span-3 flex flex-row md:col-span-1">
-              <ProductItem product={product} />
+              <ProductItem product={product} isTopSeller={index === 0} />
             </li>
           ))
         }
       </ul>
     </section>
-    <footer class="bg-neutral-300 text-sm">
-      <div class="p-4 container mx-auto">
-        <div class="grid grid-cols-3 gap-4">
-          <div>
-            <h2 class="text-lg font-bold">RYUU Cafe</h2>
-            <p class="text-sm">123 Main Street, พหลโยธิน, กรุงเทพ</p>
-            <p class="text-sm">Phone: 123-456-7890</p>
-            <p class="text-sm">Email: info@ryuucafe.com</p>
-          </div>
-          <div>
-            <h2 class="text-lg font-bold">Delivery</h2>
-            <ul class="list-disc list-inside">
-              <li>
-                <a
-                  href="https://www.wongnai.com/delivery/businesses/2731010Vj/order?af_channel=54af16e06fdfb5eca174bfee9939bcde&af_force_deeplink=true&c=share_link&pid=lineman_app"
-                  >Line Man</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://static.robinhood.in.th/app_link.html?URI=robinhoodth://merchantlanding/id/360887"
-                  >Robinhood</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://grab.onelink.me/2695613898?pid=inappsharing&c=3-C6DATEE3RAXTCX&is_retargeting=true&af_dp=grab%3A%2F%2Fopen%3FscreenType%3DGRABFOOD%26sourceID%3DA4pcqCZkS4%26merchantIDs%3D3-C6DATEE3RAXTCX&af_force_deeplink=true&af_web_dp=https%3A%2F%2Fwww.grab.com"
-                  >Grab</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://shopee.co.th/universal-link/now-food/shop/10202568?deep_and_deferred=1&shareChannel=copy_link"
-                  >Shopee Food</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h2 class="text-lg font-bold">Links</h2>
-            <ul class="list-disc list-inside">
-              <li>
-                <a
-                  href="https://www.instagram.com/ryuu.bkk?igsh=ZG0yMW9paWUyd3Rz&utm_source=qr"
-                  >Instagram</a
-                >
-              </li>
-              <li><a href="https://lin.ee/Vb6WFNu">LINE Official</a></li>
-              <li><a href="/about">About</a></li>
-              <li><a href="/contact">Contact</a></li>
-            </ul>
-          </div>
-        </div>
-        <p class="text-sm mt-4">© 2022 RYUU Cafe. All rights reserved.</p>
-      </div>
-    </footer>
+    <Footer />
   </body>
 </html>
