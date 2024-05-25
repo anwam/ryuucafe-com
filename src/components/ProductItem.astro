@@ -4,12 +4,13 @@ import type { Product } from "../types";
 
 type Props = {
   product: Product;
-  isTopSeller?: boolean;
 };
-const { product, isTopSeller } = Astro.props;
+const { product } = Astro.props;
 ---
 
-<div class="relative flex flex-col bg-neutral-50 shadow">
+<div
+  class="relative flex flex-col bg-base-100 rounded-xl overflow-hidden shadow"
+>
   <Picture
     src={product.coverImage.responsiveImage.src}
     sizes={product.coverImage.responsiveImage.sizes}
@@ -22,13 +23,13 @@ const { product, isTopSeller } = Astro.props;
     loading="lazy"
   />
   {
-    isTopSeller && (
-      <div class="badge badge-warning absolute top-2 right-2 shadow text-xs font-bold px-2 py-1 rounded-full z-50">
+    product.bestSeller && (
+      <div class="badge badge-warning absolute top-2 right-2 shadow text-xs font-bold px-2 py-1 rounded-full z-badge">
         Best Seller
       </div>
     )
   }
-  <div class="flex flex-col gap-y-2 p-2">
+  <div class="flex flex-col gap-y-2 p-3">
     <h2 class="text-lg font-bold">{product.name}</h2>
     {
       product.description && (

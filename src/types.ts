@@ -7,7 +7,8 @@ export type Product = {
   onlyDelivery: boolean;
   price: number;
   salePrice: number;
-  topSeller?: boolean;
+  bestSeller?: boolean;
+  shelfOrder?: number;
   coverImage: {
     blurhash: string;
     thumbhash: string;

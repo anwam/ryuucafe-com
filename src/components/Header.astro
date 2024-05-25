@@ -1,11 +1,13 @@
 ---
-import { Image, Picture } from "astro:assets";
+import { Picture } from "astro:assets";
+import HeaderMenus from "./HeaderMenus";
 import RyuuLogo from "/public/logo.webp";
 const subtitle = "Ceremonial Grade Matcha in Bangkok, Thailand";
 ---
 
-<div class="navbar flex w-full flex-col p-5 bg-base-100 shadow">
-  <div class="container mx-auto flex flex-row items-center gap-x-5">
+<header class="navbar sticky top-0 z-header bg-base-100 shadow h-16 lg:h-24">
+  <div class="navbar-start flex gap-x-2 md:gap-x-4">
+    <HeaderMenus vairiant="mobile" client:load />
     <Picture
       class="rounded-full aspect-square"
       width={44}
@@ -14,9 +16,10 @@ const subtitle = "Ceremonial Grade Matcha in Bangkok, Thailand";
       densities={[1, 2]}
       alt="RYUU Matcha Logo"
     />
-    <div class="flex flex-col">
-      <h2 class="text-lg font-bold">RYŪU</h2>
-      <p class="text-xs">{subtitle}</p>
-    </div>
   </div>
-</div>
+  <div class="hidden navbar-center md:flex flex-row md:flex-col">
+    <h2 class="text-lg font-bold">RYŪU</h2>
+    <p class="text-xs sr-only md:not-sr-only">{subtitle}</p>
+  </div>
+  <HeaderMenus vairiant="desktop" client:load />
+</header>
