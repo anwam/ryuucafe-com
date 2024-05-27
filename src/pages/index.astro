@@ -55,7 +55,7 @@ const products = json.data.allProducts;
     </h2>
     <ul class="grid grid-cols-3 grid-flow-row gap-4">
       {
-        products.map((product, index) => (
+        products.map((product) => (
           <li class="col-span-3 flex flex-row md:col-span-1">
             <ProductItem product={product} />
           </li>

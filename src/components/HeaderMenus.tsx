@@ -51,7 +51,7 @@ function HeaderMenus({
               <Button
                 variant="link"
                 size="lg"
-                onClick={(e) => scrollToNode(menu.link)}
+                onClick={(_e) => scrollToNode(menu.link)}
               >
                 {menu.name}
               </Button>
@@ -67,7 +67,7 @@ function HeaderMenus({
       <ul className="menu menu-horizontal px-1">
         {Menus.map((menu) => (
           <li key={menu.name}>
-            <Button variant="link" onClick={(e) => scrollToNode(menu.link)}>
+            <Button variant="link" onClick={(_e) => scrollToNode(menu.link)}>
               {menu.name}
             </Button>
           </li>
