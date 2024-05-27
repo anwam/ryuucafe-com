@@ -1,12 +1,13 @@
 name: Deploy Website
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    types:
+      - closed
 
 jobs:
   deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     env:
       DATOCMS_API_KEY: ${{ secrets.DATOCMS_API_KEY }}
