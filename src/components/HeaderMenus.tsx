@@ -1,5 +1,6 @@
 import { scrollToNode } from "src/utils/scrollToNode";
-import { Button } from "./ui/button";
+import { Button } from "@headlessui/react";
+import OrderButton from "./product/OrderButton";
 
 const Menus = [
   {
@@ -16,7 +17,7 @@ function HambugerIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-5 w-5"
+      className="w-5 h-5"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -44,13 +45,12 @@ function HeaderMenus({
         </div>
         <ul
           tabIndex={0}
-          className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          className="menu-sm menu dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
         >
           {Menus.map((menu) => (
             <li key={menu.name}>
               <Button
-                variant="link"
-                size="lg"
+                className="btn btn-primary btn-link btn-sm"
                 onClick={(_e) => scrollToNode(menu.link)}
               >
                 {menu.name}
@@ -63,16 +63,20 @@ function HeaderMenus({
   }
 
   return (
-    <div className="navbar-end hidden lg:flex">
-      <ul className="menu menu-horizontal px-1">
+    <div className="flex items-center justify-end navbar-end">
+      <ul className="hidden px-1 lg:flex menu menu-horizontal">
         {Menus.map((menu) => (
           <li key={menu.name}>
-            <Button variant="link" onClick={(_e) => scrollToNode(menu.link)}>
+            <Button
+              className="btn btn-link"
+              onClick={(_e) => scrollToNode(menu.link)}
+            >
               {menu.name}
             </Button>
           </li>
         ))}
       </ul>
+      <OrderButton />
     </div>
   );
 }

@@ -5,11 +5,11 @@ import RyuuLogo from "/public/logo.webp";
 const subtitle = "เครื่องดื่มมัทฉะ";
 ---
 
-<header class="navbar sticky top-0 z-header bg-base-100 shadow h-16 lg:h-24">
-  <div class="navbar-start flex gap-x-1 md:gap-x-4">
+<header class="sticky top-0 h-16 shadow navbar z-header bg-base-100 lg:h-24">
+  <div class="flex navbar-start gap-x-1 md:gap-x-4">
     <HeaderMenus vairiant="mobile" client:load />
     <Picture
-      class="rounded-full aspect-square hidden md:block text-base/none"
+      class="hidden rounded-full aspect-square md:block text-base/none"
       width={44}
       height={44}
       src={RyuuLogo}
@@ -21,6 +21,6 @@ const subtitle = "เครื่องดื่มมัทฉะ";
       <p class="text-xs sr-only md:not-sr-only">{subtitle}</p>
     </div>
   </div>
-  <div class="hidden navbar-center md:flex flex-row md:flex-col"></div>
+  <div class="flex flex-row flex-grow navbar-center md:flex-col"></div>
   <HeaderMenus vairiant="desktop" client:load />
 </header>
