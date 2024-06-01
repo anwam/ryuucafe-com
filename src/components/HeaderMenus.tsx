@@ -17,7 +17,7 @@ function HambugerIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="w-5 h-5"
+      className="h-5 w-5"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -45,12 +45,12 @@ function HeaderMenus({
         </div>
         <ul
           tabIndex={0}
-          className="menu-sm menu dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
         >
           {Menus.map((menu) => (
             <li key={menu.name}>
               <Button
-                className="btn btn-primary btn-link btn-sm"
+                className="btn btn-link btn-primary btn-sm"
                 onClick={(_e) => scrollToNode(menu.link)}
               >
                 {menu.name}
@@ -63,12 +63,12 @@ function HeaderMenus({
   }
 
   return (
-    <div className="flex items-center justify-end navbar-end">
-      <ul className="hidden px-1 lg:flex menu menu-horizontal">
+    <div className="navbar-end flex items-center justify-end">
+      <ul className="menu menu-horizontal hidden gap-x-1 px-1 lg:flex">
         {Menus.map((menu) => (
           <li key={menu.name}>
             <Button
-              className="btn btn-link"
+              className="btn btn-link hover:btn hover:btn-primary"
               onClick={(_e) => scrollToNode(menu.link)}
             >
               {menu.name}

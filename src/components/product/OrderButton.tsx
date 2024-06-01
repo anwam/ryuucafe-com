@@ -14,7 +14,7 @@ export default function OrderButton() {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="btn btn-primary btn-wide"
+        className="btn btn-link hover:btn hover:btn-primary"
       >
         สั่งซื้อ
       </Button>
@@ -25,16 +25,15 @@ export default function OrderButton() {
       >
         <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
-        <div className="fixed inset-0 flex items-center justify-center w-screen p-4">
-          <DialogPanel className="max-w-screen-md p-3 space-y-4 bg-white border shadow-lg lg:p-6 rounded-box">
-            <DialogTitle>สั่งซื้อมัทฉะ Delivery</DialogTitle>
+        <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
+          <DialogPanel className="max-w-screen-md space-y-4 rounded-box border bg-base-100 p-3 shadow-lg lg:p-6">
             <Description>
-              สามารถสั่งซื้อได้ที่ Delivery ทุกแพลตฟอร์ม
+              สามารถสั่งซื้อได้ที่ Delivery App ทุกแพลตฟอร์ม
             </Description>
             <ul className="grid w-full max-w-full grid-flow-row grid-cols-2 gap-4">
               <li className="">
                 <a
-                  className="w-full btn btn-primary lg:btn-lg lg:btn-wide"
+                  className="btn btn-primary w-full lg:btn-md lg:btn-wide"
                   href="https://www.wongnai.com/delivery/businesses/2731010Vj/order"
                 >
                   Line Man
@@ -42,7 +41,7 @@ export default function OrderButton() {
               </li>
               <li>
                 <a
-                  className="w-full btn bg-violet-600 text-violet-100 lg:btn-lg lg:btn-wide"
+                  className="btn w-full bg-violet-600 text-violet-100 lg:btn-md lg:btn-wide hover:bg-violet-700"
                   href="https://static.robinhood.in.th/app_link.html?URI=robinhoodth://merchantlanding/id/360887"
                 >
                   Robinhood
@@ -50,7 +49,7 @@ export default function OrderButton() {
               </li>
               <li>
                 <a
-                  className="w-full text-green-100 bg-green-700 btn lg:btn-lg lg:btn-wide"
+                  className="btn w-full bg-green-700 text-green-100 lg:btn-md lg:btn-wide hover:bg-green-800"
                   href="https://grab.onelink.me/2695613898"
                 >
                   Grab
@@ -58,7 +57,7 @@ export default function OrderButton() {
               </li>
               <li>
                 <a
-                  className="w-full bg-orange-600 btn text-orange-50 lg:btn-lg lg:btn-wide"
+                  className="btn w-full bg-orange-600 text-orange-50 lg:btn-md lg:btn-wide hover:bg-orange-700"
                   href="https://shopee.co.th/universal-link/now-food/shop/10202568"
                 >
                   Shopee
@@ -67,7 +66,7 @@ export default function OrderButton() {
             </ul>
             <div>
               <Button
-                className="btn btn-error"
+                className="btn btn-outline btn-error"
                 onClick={() => setIsOpen(false)}
               >
                 ยกเลิก
