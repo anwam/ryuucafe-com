@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/anwam/ryuucafe-com/compare/v1.0.0...v1.1.0) (2024-06-01)
+
+
+### Features
+
+* new order button ([cc37a3d](https://github.com/anwam/ryuucafe-com/commit/cc37a3d02f4cb5b0bfef6f7c01c901a24070a40f))
+
 ## 1.0.0 (2024-05-27)
 
 
