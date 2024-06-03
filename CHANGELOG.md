@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/anwam/ryuucafe-com/compare/v1.2.0...v1.3.0) (2024-06-03)
+
+
+### Features
+
+* add hero section ([bc78328](https://github.com/anwam/ryuucafe-com/commit/bc78328cd21d55cab9085fd5f464a76eb5ce104c))
+
 ## [1.2.0](https://github.com/anwam/ryuucafe-com/compare/v1.1.0...v1.2.0) (2024-06-03)
 
 
