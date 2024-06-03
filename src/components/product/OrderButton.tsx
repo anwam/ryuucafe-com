@@ -6,17 +6,23 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
+import clsx from "clsx";
 
-export default function OrderButton() {
+type Props = {
+  className?: string;
+  children?: React.ReactNode;
+};
+export default function OrderButton({ className, children }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <Button
+        accessKey="Order"
         onClick={() => setIsOpen(true)}
-        className="btn btn-link hover:btn hover:btn-primary"
+        className={clsx("btn btn-link hover:btn hover:btn-primary", className)}
       >
-        สั่งซื้อ
+        {children || "สั่งซื้อ"}
       </Button>
       <Dialog
         className="relative z-modal"
@@ -27,12 +33,15 @@ export default function OrderButton() {
 
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
           <DialogPanel className="max-w-screen-md space-y-4 rounded-box border bg-base-100 p-3 shadow-lg lg:p-6">
-            <Description>
-              สามารถสั่งซื้อได้ที่ Delivery App ทุกแพลตฟอร์ม
+            <Description className="font-ibm-plex-sans-thai">
+              <b>
+                <i>สามารถสั่งซื้อได้ที่ Delivery App ทุกแพลตฟอร์ม</i>
+              </b>
             </Description>
             <ul className="grid w-full max-w-full grid-flow-row grid-cols-2 gap-4">
               <li className="">
                 <a
+                  accessKey="Lineman"
                   className="btn btn-primary w-full lg:btn-md lg:btn-wide"
                   href="https://www.wongnai.com/delivery/businesses/2731010Vj/order"
                 >
@@ -41,6 +50,7 @@ export default function OrderButton() {
               </li>
               <li>
                 <a
+                  accessKey="Robinhood"
                   className="btn w-full bg-violet-600 text-violet-100 lg:btn-md lg:btn-wide hover:bg-violet-700"
                   href="https://static.robinhood.in.th/app_link.html?URI=robinhoodth://merchantlanding/id/360887"
                 >
@@ -49,6 +59,7 @@ export default function OrderButton() {
               </li>
               <li>
                 <a
+                  accessKey="Grab"
                   className="btn w-full bg-green-700 text-green-100 lg:btn-md lg:btn-wide hover:bg-green-800"
                   href="https://grab.onelink.me/2695613898"
                 >
@@ -57,6 +68,7 @@ export default function OrderButton() {
               </li>
               <li>
                 <a
+                  accessKey="Shopee"
                   className="btn w-full bg-orange-600 text-orange-50 lg:btn-md lg:btn-wide hover:bg-orange-700"
                   href="https://shopee.co.th/universal-link/now-food/shop/10202568"
                 >
@@ -66,6 +78,7 @@ export default function OrderButton() {
             </ul>
             <div>
               <Button
+                accessKey="Cancel"
                 className="btn btn-outline btn-error"
                 onClick={() => setIsOpen(false)}
               >

@@ -2,14 +2,14 @@
 import { Picture } from "astro:assets";
 import HeaderMenus from "./HeaderMenus";
 import RyuuLogo from "/public/logo.webp";
-const subtitle = "เครื่องดื่มมัทฉะ";
+const subtitle = "เครื่องดื่มมัทฉะพรีเมี่ยม";
 ---
 
-<header class="sticky top-0 h-16 shadow navbar z-header bg-base-100 lg:h-24">
-  <div class="flex navbar-start gap-x-1 md:gap-x-4">
+<header class="navbar sticky top-0 z-header h-16 bg-base-100 shadow lg:h-24">
+  <div class="navbar-start flex gap-x-1 md:gap-x-4">
     <HeaderMenus vairiant="mobile" client:load />
     <Picture
-      class="hidden rounded-full aspect-square md:block text-base/none"
+      class="hidden aspect-square rounded-full text-base/none md:block"
       width={44}
       height={44}
       src={RyuuLogo}
@@ -17,10 +17,10 @@ const subtitle = "เครื่องดื่มมัทฉะ";
       alt="RYUU Matcha Logo"
     />
     <div class="flex flex-col">
-      <h1 class="text-lg font-bold">RYŪU</h1>
-      <p class="text-xs sr-only md:not-sr-only">{subtitle}</p>
+      <h1 class="text-lg font-bold">RYUU りゅう</h1>
+      <p class="sr-only text-xs md:not-sr-only">{subtitle}</p>
     </div>
   </div>
-  <div class="flex flex-row flex-grow navbar-center md:flex-col"></div>
+  <div class="navbar-center flex flex-grow flex-row md:flex-col"></div>
   <HeaderMenus vairiant="desktop" client:load />
 </header>
