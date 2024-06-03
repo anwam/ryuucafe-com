@@ -9,6 +9,9 @@ export type Product = {
   salePrice: number;
   bestSeller?: boolean;
   shelfOrder?: number;
+  powderType?: boolean;
+  tasteNote?: string;
+  recommended?: boolean;
   coverImage: {
     blurhash: string;
     thumbhash: string;

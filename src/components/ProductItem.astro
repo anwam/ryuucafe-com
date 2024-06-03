@@ -10,7 +10,7 @@ const { product } = Astro.props;
 ---
 
 <div
-  class="relative flex flex-col bg-base-100 rounded-xl overflow-hidden shadow"
+  class="relative flex flex-col overflow-hidden rounded-box bg-base-100 shadow"
 >
   <Picture
     src={product.coverImage.responsiveImage.src}
@@ -24,17 +24,34 @@ const { product } = Astro.props;
     loading="eager"
   />
   {
-    product.bestSeller && (
-      <div class="badge badge-warning absolute top-2 right-2 shadow text-xs font-bold px-2 py-1 rounded-full z-badge">
-        Best Seller
+    product.bestSeller ? (
+      <div class="font-ibm-plex-sans-thai badge badge-error absolute right-2 top-2 z-badge rounded-full px-2 py-1 text-xs font-bold text-white shadow">
+        ขายดี
       </div>
-    )
+    ) : product.recommended ? (
+      <div class="font-ibm-plex-sans-thai badge badge-primary absolute right-2 top-2 z-badge rounded-full px-2 py-1 text-xs font-bold shadow">
+        Recommended
+      </div>
+    ) : null
   }
-  <div class="flex flex-col flex-grow gap-y-2 p-3">
+  <div class="flex flex-grow flex-col gap-y-2 p-3">
     <h3 class="text-lg font-bold">{product.name}</h3>
     {
+      product.tasteNote && (
+        <div class="flex flex-row flex-wrap items-center gap-x-1 gap-y-1">
+          <h4 class="badge badge-primary badge-outline badge-xs">taste note</h4>
+          <span class="font-poppins text-xs">
+            {product.tasteNote
+              .split(",")
+              .map((tn) => tn.trim())
+              .join(" • ")}
+          </span>
+        </div>
+      )
+    }
+    {
       product.description && (
-        <p class="text-sm text-neutral-600 text-pretty">
+        <p class="text-pretty text-sm text-neutral-600">
           {product.description}
         </p>
       )

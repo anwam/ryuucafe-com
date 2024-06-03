@@ -16,6 +16,12 @@ export default {
         header: "100",
         modal: "200",
       },
+      fontFamily: {
+        "ibm-plex-sans-thai": ["IBM Plex Sans Thai"],
+        poppins: ["Poppins"],
+        estebun: ["Estebun"],
+        sarabun: ["Sarabun"],
+      },
     },
   },
   plugins: [require("tailwindcss-animate"), require("daisyui")],

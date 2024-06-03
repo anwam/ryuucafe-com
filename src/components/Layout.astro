@@ -1,4 +1,9 @@
 ---
+import "@fontsource/ibm-plex-sans-thai";
+import "@fontsource/poppins";
+import "@fontsource/esteban";
+import "@fontsource/sarabun";
+import "../style/global.css";
 import Head from "../modules/seo/Head.astro";
 import Footer from "./Footer.astro";
 import Header from "./Header.astro";
@@ -6,7 +11,7 @@ import Header from "./Header.astro";
 
 <html lang="th" data-theme="emerald" class="relative">
   <Head />
-  <body class="bg-base-100 relative">
+  <body class="relative bg-base-100">
     <Header />
     <slot />
     <Footer />
