@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/anwam/ryuucafe-com/compare/v1.1.0...v1.2.0) (2024-06-03)
+
+
+### Features
+
+* update data type ([fb9b424](https://github.com/anwam/ryuucafe-com/commit/fb9b4243b7bc3c5758f5f2985254e1bc143883c6))
+
 ## [1.1.0](https://github.com/anwam/ryuucafe-com/compare/v1.0.0...v1.1.0) (2024-06-01)
 
 
