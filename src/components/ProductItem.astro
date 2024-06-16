@@ -25,11 +25,11 @@ const { product } = Astro.props
   />
   {
     product.bestSeller ? (
-      <div class="badge badge-accent absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold text-white shadow">
+      <div class="badge badge-accent absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold text-white shadow lg:right-2 lg:top-2">
         ขายดี
       </div>
     ) : product.recommended ? (
-      <div class="badge badge-primary absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold shadow">
+      <div class="badge badge-primary absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold shadow lg:right-2 lg:top-2">
         Recommended
       </div>
     ) : null
