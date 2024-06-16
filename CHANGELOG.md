@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/anwam/ryuucafe-com/compare/v1.3.0...v1.4.0) (2024-06-16)
+
+
+### Features
+
+* change logo ([7f0f398](https://github.com/anwam/ryuucafe-com/commit/7f0f398578bdf376ede1dc1e334510ec6a3b396c))
+
 ## [1.3.0](https://github.com/anwam/ryuucafe-com/compare/v1.2.0...v1.3.0) (2024-06-03)
 
 
