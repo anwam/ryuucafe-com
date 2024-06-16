@@ -7,17 +7,17 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://ryuucafe.com",
-  integrations: [
-    tailwind({
-      configFile: "./tailwind.config.mjs",
-      applyBaseStyles: true,
-    }),
-    react(),
-    playformCompress(),
-    sitemap(),
-  ],
-  image: {
-    domains: ["https://www.datocms-assets.com/"],
-  },
+	site: "https://ryuucafe.com",
+	integrations: [
+		tailwind({
+			configFile: "./tailwind.config.mjs",
+			applyBaseStyles: true,
+		}),
+		react(),
+		playformCompress(),
+		sitemap(),
+	],
+	image: {
+		domains: ["https://www.datocms-assets.com/"],
+	},
 });

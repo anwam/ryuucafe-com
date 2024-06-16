@@ -1,29 +1,29 @@
 ---
-import { SEO } from "astro-seo";
-import FeatureImage from "../../assets/images/home/feature-1.webp";
+import { SEO } from 'astro-seo'
+import FeatureImage from '../../assets/images/home/feature-1.webp'
 
 type Props = {
-  title?: string;
-  description?: string;
+  title?: string
+  description?: string
   openGraph?: {
     basic: {
-      title: string;
-      type: string;
-      image: string;
-    };
-  };
-};
+      title: string
+      type: string
+      image: string
+    }
+  }
+}
 const {
-  title = "RYUU りゅう",
-  description = "เครื่องดื่มมัทฉะ",
+  title = 'RYUU りゅう | Bangkok',
+  description = 'เครื่องดื่มมัทฉะ',
   openGraph = {
     basic: {
-      title: "RYUU りゅう",
-      type: "website",
+      title: 'RYUU りゅう | Bangkok',
+      type: 'website',
       image: FeatureImage.src,
     },
   },
-}: Props = Astro.props;
+}: Props = Astro.props
 ---
 
 <head>

@@ -1,15 +1,15 @@
 ---
-import { type Product } from "../types";
-import ProductItem from "../components/ProductItem.astro";
-import Layout from "@/components/Layout.astro";
-import FeatureImage from "../assets/images/home/feature-1.webp";
-import { Image } from "astro:assets";
-import OrderButton from "@/components/product/OrderButton";
+import type { Product } from '../types'
+import ProductItem from '../components/ProductItem.astro'
+import Layout from '@/components/Layout.astro'
+import FeatureImage from '../assets/images/home/feature-1.webp'
+import { Image } from 'astro:assets'
+import OrderButton from '@/components/product/OrderButton'
 
-const response = await fetch("https://graphql.datocms.com/", {
-  method: "POST",
+const response = await fetch('https://graphql.datocms.com/', {
+  method: 'POST',
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
     Authorization: `Bearer ${import.meta.env.DATOCMS_API_KEY}`,
   },
   body: JSON.stringify({
@@ -43,32 +43,32 @@ const response = await fetch("https://graphql.datocms.com/", {
         }
       }`,
   }),
-});
+})
 
-const json = (await response.json()) as { data: { allProducts: Product[] } };
-const products = json.data.allProducts;
-const singleMenus = products.filter((product) => product.powderType);
-const blendMenus = products.filter((product) => !product.powderType);
+const json = (await response.json()) as { data: { allProducts: Product[] } }
+const products = json.data.allProducts
+const singleMenus = products.filter((product) => product.powderType)
+const blendMenus = products.filter((product) => !product.powderType)
 ---
 
 <Layout>
   <article
-    class="container relative mx-auto flex max-w-screen-lg flex-col gap-y-4 bg-base-100 p-4"
+    class="container relative mx-auto flex max-w-screen-xl flex-col gap-y-4 bg-base-100 p-3 md:p-4 lg:px-8"
   >
-    <section class="hero">
-      <div class="hero-content flex flex-col md:flex-row">
+    <section class="hero lg:max-w-screen-lg mx-auto">
+      <div class="hero-content p-0 flex flex-col md:flex-row">
         <Image
           src={FeatureImage}
           alt="feature-image-1"
-          class="rounded-box"
+          class="rounded-md"
           width={480}
         />
-        <div class="flex flex-col">
+        <div class="flex flex-col gap-y-3">
           <h2 class="text-xl font-bold text-primary md:w-fit">
             มัทฉะเกรดพิธีการ
           </h2>
           <p class="font-ibm-plex-sans-thai text-base">
-            ริว ใช้ผงมัทฉะระดับ Ceremonial Grade หรือเกรดพิธีการในการชงทุกเมนู
+            ที่ร้านริว เราใช้ผงมัทฉะระดับ Ceremonial Grade หรือเกรดพิธีการในการชงทุกเมนู
             เพื่อให้ได้คุณภาพที่ดีที่สุด สร้างรสชาติที่เข้มข้นซับซ้อน
             มีความอูมามิและกลิ่นหอม สร้างประสบการณ์การดื่มชาขึ้นอีกขั้น
           </p>
@@ -81,28 +81,30 @@ const blendMenus = products.filter((product) => !product.powderType);
         </div>
       </div>
     </section>
-    <h2 id="menu" class="text-xl font-bold text-primary">เมนู</h2>
-    <h3 class="mt-2 text-3xl text-primary underline">Single สายพันธุ์เดี่ยว</h3>
-    <ul class="grid grid-flow-row grid-cols-6 gap-4">
-      {
-        singleMenus.map((product) => (
-          <li class="col-span-3 flex flex-row md:col-span-2">
-            <ProductItem product={product} />
-          </li>
-        ))
-      }
-    </ul>
-    <h3 class="mt-2 text-3xl text-primary underline">
-      Blend มัทฉะเบลนด์สูตรเฉพาะของทางร้าน
-    </h3>
-    <ul class="grid grid-flow-row grid-cols-6 gap-4">
-      {
-        blendMenus.map((product) => (
-          <li class="col-span-3 flex flex-row md:col-span-2">
-            <ProductItem product={product} />
-          </li>
-        ))
-      }
-    </ul>
+
+    <section class="mx-auto flex flex-col gap-y-3 lg:max-w-screen-lg">
+      <h2 class="mb-2 mt-4 text-3xl text-primary underline">Single Farm</h2>
+      <p>เมนูมัทฉะสายพันธุ์เดี่ยว</p>
+      <ul class="grid grid-flow-row grid-cols-6 gap-2 lg:gap-4">
+        {
+          singleMenus.map((product) => (
+            <li class="col-span-6 flex flex-row md:col-span-2">
+              <ProductItem product={product} />
+            </li>
+          ))
+        }
+      </ul>
+      <h2 class="mb-2 mt-6 text-3xl text-primary underline">Blend</h2>
+      <p>เมนูมัทฉะเบลนด์สูตรเฉพาะของทางร้าน</p>
+      <ul class="grid grid-flow-rows grid-cols-6 gap-2 lg:gap-4">
+        {
+          blendMenus.map((product) => (
+            <li class="col-span-6 flex flex-row md:col-span-2">
+              <ProductItem product={product} />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
   </article>
 </Layout>

@@ -1,16 +1,16 @@
 ---
-import { Picture } from "astro:assets";
-import type { Product } from "../types";
-import OrderButton from "./product/OrderButton";
+import { Picture } from 'astro:assets'
+import type { Product } from '../types'
+import OrderButton from './product/OrderButton'
 
 type Props = {
-  product: Product;
-};
-const { product } = Astro.props;
+  product: Product
+}
+const { product } = Astro.props
 ---
 
 <div
-  class="relative flex flex-col overflow-hidden rounded-box bg-base-100 shadow"
+  class="relative flex flex-col overflow-hidden rounded-md bg-base-100 shadow"
 >
   <Picture
     src={product.coverImage.responsiveImage.src}
@@ -25,16 +25,16 @@ const { product } = Astro.props;
   />
   {
     product.bestSeller ? (
-      <div class="font-ibm-plex-sans-thai badge badge-error absolute right-2 top-2 z-badge rounded-full px-2 py-1 text-xs font-bold text-white shadow">
+      <div class="badge badge-accent absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold text-white shadow">
         ขายดี
       </div>
     ) : product.recommended ? (
-      <div class="font-ibm-plex-sans-thai badge badge-primary absolute right-2 top-2 z-badge rounded-full px-2 py-1 text-xs font-bold shadow">
+      <div class="badge badge-primary absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold shadow">
         Recommended
       </div>
     ) : null
   }
-  <div class="flex flex-grow flex-col gap-y-2 p-3">
+  <div class="flex flex-grow flex-col gap-y-1 p-1 lg:p-3">
     <h3 class="text-lg font-bold">{product.name}</h3>
     {
       product.tasteNote && (
@@ -51,7 +51,7 @@ const { product } = Astro.props;
     }
     {
       product.description && (
-        <p class="text-pretty text-sm text-neutral-600">
+        <p class="text-pretty text-base text-neutral-600">
           {product.description}
         </p>
       )

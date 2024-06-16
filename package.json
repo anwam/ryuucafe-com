@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@343dev/optimizt": "^7.0.0",
     "@astrojs/check": "^0.7.0",
     "@astrojs/react": "^3.3.4",
     "@astrojs/sitemap": "^3.1.5",
@@ -39,6 +40,7 @@
     "typescript": "^5.4.5"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.8.1",
     "daisyui": "^4.11.1",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
