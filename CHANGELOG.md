@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/anwam/ryuucafe-com/compare/v1.4.0...v1.5.0) (2024-07-14)
+
+
+### Features
+
+* redesign ([870e0b0](https://github.com/anwam/ryuucafe-com/commit/870e0b0e8b81dc8a49be816e038fe82464f946f1))
+
 ## [1.4.0](https://github.com/anwam/ryuucafe-com/compare/v1.3.0...v1.4.0) (2024-06-16)
 
 
