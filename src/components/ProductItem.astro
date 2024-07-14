@@ -1,59 +1,64 @@
 ---
-import { Picture } from 'astro:assets'
-import type { Product } from '../types'
-import OrderButton from './product/OrderButton'
+import { Picture } from "astro:assets";
+import type { Product } from "../types";
+import OrderButton from "./product/OrderButton";
 
 type Props = {
-  product: Product
-}
-const { product } = Astro.props
+  product: Product;
+};
+const { product } = Astro.props;
 ---
 
 <div
-  class="relative flex flex-col overflow-hidden rounded-md bg-base-100 shadow"
+  class="relative row-span-4 grid grid-rows-subgrid overflow-hidden rounded-md bg-base-100 transition-all hover:shadow"
 >
-  <Picture
-    src={product.coverImage.responsiveImage.src}
-    sizes={product.coverImage.responsiveImage.sizes}
-    srcset={product.coverImage.responsiveImage.srcSet}
-    width={product.coverImage.responsiveImage.width}
-    height={product.coverImage.responsiveImage.height}
-    alt={product.name}
-    decoding={"async"}
-    densities={[1.5, 2]}
-    loading="eager"
-  />
-  {
-    product.bestSeller ? (
-      <div class="badge badge-accent absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold text-white shadow lg:right-2 lg:top-2">
-        ขายดี
-      </div>
-    ) : product.recommended ? (
-      <div class="badge badge-primary absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold shadow lg:right-2 lg:top-2">
-        Recommended
-      </div>
-    ) : null
-  }
-  <div class="flex flex-grow flex-col gap-y-1 p-1 lg:p-3">
-    <h3 class="text-lg font-bold">{product.name}</h3>
+  <div>
+    <Picture
+      src={product.coverImage.responsiveImage.src}
+      sizes={product.coverImage.responsiveImage.sizes}
+      srcset={product.coverImage.responsiveImage.srcSet}
+      width={product.coverImage.responsiveImage.width}
+      height={product.coverImage.responsiveImage.height}
+      alt={product.name}
+      decoding={"async"}
+      densities={[1.5, 2]}
+      loading="eager"
+    />
+    {
+      product.bestSeller ? (
+        <div class="badge badge-accent absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold text-white shadow lg:right-2 lg:top-2">
+          ขายดี
+        </div>
+      ) : product.recommended ? (
+        <div class="badge badge-primary absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold shadow lg:right-2 lg:top-2">
+          Recommended
+        </div>
+      ) : null
+    }
+  </div>
+  <h3 class="px-1 text-base font-bold">{product.name}</h3>
+  <div class="px-1">
+    {
+      product.description && (
+        <p class="text-pretty text-sm text-neutral-600">
+          {product.description}
+        </p>
+      )
+    }
+  </div>
+  <div class="px-1 py-0.5">
     {
       product.tasteNote && (
         <div class="flex flex-row flex-wrap items-center gap-x-1 gap-y-1">
-          <h4 class="badge badge-primary badge-outline badge-xs">taste note</h4>
-          <span class="font-poppins text-xs">
-            {product.tasteNote
-              .split(",")
-              .map((tn) => tn.trim())
-              .join(" • ")}
-          </span>
+          {product.tasteNote
+            .split(",")
+            .map((tn) => tn.trim())
+            .map((tn) => (
+              <span class="rounded-box px-1 py-0.5 font-poppins text-[0.625rem] text-primary ring-1 ring-primary">
+                {tn}
+              </span>
+            ))}
         </div>
-      )
-    }
-    {
-      product.description && (
-        <p class="text-pretty text-base text-neutral-600">
-          {product.description}
-        </p>
       )
     }
   </div>
