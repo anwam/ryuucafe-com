@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/anwam/ryuucafe-com/compare/v1.5.0...v1.6.0) (2024-08-14)
+
+
+### Features
+
+* improve hero section ([0ef161f](https://github.com/anwam/ryuucafe-com/commit/0ef161fffd3c73e5dbd326e86aebbdd1e394dc49))
+
 ## [1.5.0](https://github.com/anwam/ryuucafe-com/compare/v1.4.0...v1.5.0) (2024-07-14)
 
 
