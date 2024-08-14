@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.2](https://github.com/anwam/ryuucafe-com/compare/v1.6.1...v1.6.2) (2024-08-14)
+
+
+### Bug Fixes
+
+* update github actions and settings.json ([cb14840](https://github.com/anwam/ryuucafe-com/commit/cb148406f407b7f883362a30946f650cbf31c00f))
+
 ## [1.6.1](https://github.com/anwam/ryuucafe-com/compare/v1.6.0...v1.6.1) (2024-08-14)
 
 
