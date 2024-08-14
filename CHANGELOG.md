@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/anwam/ryuucafe-com/compare/v1.6.0...v1.6.1) (2024-08-14)
+
+
+### Bug Fixes
+
+* update github actions ([69e3207](https://github.com/anwam/ryuucafe-com/commit/69e32076349637456b33bd2306d5cacb41cfe9d9))
+
 ## [1.6.0](https://github.com/anwam/ryuucafe-com/compare/v1.5.0...v1.6.0) (2024-08-14)
 
 
