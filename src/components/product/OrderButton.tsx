@@ -75,10 +75,10 @@ export default function OrderButton({ className, children }: Props) {
             <div>
               <Button
                 accessKey="Cancel"
-                className="btn btn-outline btn-error"
+                className="btn btn-sm btn-primary btn-outline"
                 onClick={() => setIsOpen(false)}
               >
-                ยกเลิก
+                ปิด
               </Button>
             </div>
           </DialogPanel>

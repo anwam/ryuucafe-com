@@ -10,7 +10,7 @@ const { product } = Astro.props;
 ---
 
 <div
-  class="relative row-span-4 grid grid-rows-subgrid overflow-hidden rounded-md bg-base-100 transition-all hover:shadow"
+  class="relative row-span-4 grid grid-rows-subgrid gap-1 overflow-hidden rounded-md bg-base-100 shadow transition-all hover:shadow-primary lg:gap-2"
 >
   <div>
     <Picture
@@ -24,29 +24,46 @@ const { product } = Astro.props;
       densities={[1.5, 2]}
       loading="eager"
     />
+
     {
       product.bestSeller ? (
-        <div class="badge badge-accent absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold text-white shadow lg:right-2 lg:top-2">
+        <div class="badge badge-accent absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold text-white shadow md:hidden lg:right-2 lg:top-2">
           ขายดี
         </div>
       ) : product.recommended ? (
-        <div class="badge badge-primary absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold shadow lg:right-2 lg:top-2">
+        <div class="badge badge-primary absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold shadow md:hidden lg:right-2 lg:top-2">
           Recommended
         </div>
       ) : null
     }
   </div>
-  <h3 class="px-1 text-base font-bold">{product.name}</h3>
-  <div class="px-1">
+  <div class="flex flex-wrap gap-x-2 gap-y-1 px-1.5 md:px-2">
+    <h3 class="text-sm font-bold md:text-base">{product.name}</h3>
+    {
+      product.bestSeller && (
+        <div class="badge badge-accent hidden rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs text-white md:inline-flex">
+          ขายดี
+        </div>
+      )
+    }
+    {
+      product.recommended && (
+        <div class="badge badge-primary hidden rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs text-white md:inline-flex">
+          แนะนำ
+        </div>
+      )
+    }
+  </div>
+  <div class="px-1.5 md:px-2">
     {
       product.description && (
-        <p class="text-pretty text-sm text-neutral-600">
+        <p class="whitespace-pre-line text-pretty text-xs text-neutral-600 md:text-sm lg:text-base">
           {product.description}
         </p>
       )
     }
   </div>
-  <div class="px-1 py-0.5">
+  <div class="px-1.5 py-0.5 md:px-2 md:py-2">
     {
       product.tasteNote && (
         <div class="flex flex-row flex-wrap items-center gap-x-1 gap-y-1">
@@ -54,7 +71,7 @@ const { product } = Astro.props;
             .split(",")
             .map((tn) => tn.trim())
             .map((tn) => (
-              <span class="rounded-box px-1 py-0.5 font-poppins text-[0.625rem] text-primary ring-1 ring-primary">
+              <span class="rounded-box border border-primary px-1 py-0.5 font-poppins text-[0.625rem] text-primary">
                 {tn}
               </span>
             ))}

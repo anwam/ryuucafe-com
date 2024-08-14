@@ -1,5 +1,5 @@
 ---
-import type { Product } from "../types";
+import type { PageContent, Product } from "../types";
 import ProductItem from "../components/ProductItem.astro";
 import Layout from "@/components/Layout.astro";
 import FeatureImage from "../assets/images/home/feature-1.webp";
@@ -14,7 +14,7 @@ const response = await fetch("https://graphql.datocms.com/", {
   },
   body: JSON.stringify({
     query: `
-      query AllProducts {
+      {
         allProducts(orderBy: shelfOrder_ASC) {
           available
           description
@@ -41,39 +41,73 @@ const response = await fetch("https://graphql.datocms.com/", {
             }
           }
         }
+        pageContent {
+          heroSection {
+            heroImage {
+              responsiveImage(imgixParams: {w: 480, h: 320}) {
+                sizes
+                srcSet
+                webpSrcSet
+                alt
+                src
+                width
+                height
+              }
+            }
+            heroTitle
+            heroDescription
+          }
+        }
       }`,
   }),
 });
 
-const json = (await response.json()) as { data: { allProducts: Product[] } };
+const json = (await response.json()) as {
+  data: { allProducts: Product[]; pageContent: PageContent };
+};
 const products = json.data.allProducts;
+const content = json.data.pageContent;
 const singleMenus = products.filter((product) => product.powderType);
 const blendMenus = products.filter((product) => !product.powderType);
 ---
 
 <Layout>
   <article
-    class="container relative mx-auto flex flex-col gap-y-4 px-2 py-3 md:px-0 lg:py-5"
+    class="container relative mx-auto flex flex-col gap-y-4 px-2 py-3 lg:px-5 lg:py-5 xl:px-0"
   >
     <section class="container hero w-full">
       <div
         class="container flex w-full flex-col justify-center gap-x-2 gap-y-2 p-0 md:flex-row md:items-center md:gap-x-4 lg:gap-x-8"
       >
-        <Image
-          src={FeatureImage}
-          alt="feature-image-1"
-          class="rounded-md"
-          width={480}
-        />
+        {
+          content.heroSection.heroImage.responsiveImage ? (
+            <Image
+              src={content.heroSection.heroImage.responsiveImage.src}
+              height={content.heroSection.heroImage.responsiveImage.height}
+              width={content.heroSection.heroImage.responsiveImage.width}
+              srcset={content.heroSection.heroImage.responsiveImage.webpSrcSet}
+              alt="feature-image-1"
+              class="rounded-md"
+            />
+          ) : (
+            <Image
+              src={FeatureImage}
+              alt="feature-image-1"
+              class="rounded-md"
+              width={480}
+            />
+          )
+        }
         <div class="flex flex-1 flex-col gap-y-2">
           <h2 class="text-lg font-bold text-primary md:w-fit">
-            มัทฉะเกรดพิธีการ
+            {content.heroSection.heroTitle || `มัทฉะเกรดพิธีการ`}
           </h2>
           <p
             class="whitespace-pre-line font-ibm-plex-sans-thai text-sm lg:text-base"
           >
             {
-              `ที่ร้านริว เราใช้ผงมัทฉะระดับ Ceremonial Grade
+              content.heroSection.heroDescription ||
+                `ที่ร้านริว เราใช้ผงมัทฉะระดับ Ceremonial Grade
             หรือเกรดพิธีการในการชงทุกเมนู เพื่อให้ได้คุณภาพที่ดีที่สุด
             สร้างรสชาติที่เข้มข้นซับซ้อน มีความอูมามิและกลิ่นหอม
             สร้างประสบการณ์การดื่มชาขึ้นอีกขั้น`
@@ -83,7 +117,7 @@ const blendMenus = products.filter((product) => !product.powderType);
             <a href="#contact" class="btn btn-primary btn-sm">มาหาเรา</a>
             <OrderButton
               className="btn btn-outline btn-primary btn-sm"
-              client:only
+              client:only="react"
             >
               สั่งซื้อชาเขียว
             </OrderButton>
@@ -92,28 +126,28 @@ const blendMenus = products.filter((product) => !product.powderType);
       </div>
     </section>
 
-    <section class="mx-auto flex flex-col gap-y-2">
+    <section id="menu" class="mx-auto flex flex-col gap-y-2">
       <hr class="border-t border-primary/30" />
-      <div class="flex items-center gap-x-2">
-        <h2 class="text-lg text-primary underline">Single Cultivar</h2>
-        <p class="text-xs text-slate-500 md:text-sm">
-          เมนูมัทฉะสายพันธุ์เดี่ยว
-        </p>
-      </div>
+      <h2 class="mt-2 text-lg font-bold text-primary lg:mt-3 lg:text-2xl">
+        Single Cultivar
+      </h2>
+      <p class="mb-3 text-xs text-slate-500 md:text-sm lg:mb-6">
+        เมนูมัทฉะสายพันธุ์เดี่ยว
+      </p>
       <div
-        class="grid grid-cols-2 grid-rows-[repeat(4,_auto)] gap-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-3"
+        class="mb-3 grid grid-cols-2 grid-rows-[repeat(4,_auto)] gap-3 md:grid-cols-3 lg:grid-cols-4"
       >
         {singleMenus.map((product) => <ProductItem product={product} />)}
       </div>
       <hr class="border-t border-primary/30" />
-      <div class="flex items-center gap-x-2">
-        <h2 class="text-lg text-primary underline">Blend</h2>
-        <p class="text-xs text-slate-500 md:text-sm">
-          เมนูมัทฉะเบลนด์สูตรเฉพาะของทางร้าน
-        </p>
-      </div>
+      <h2 class="mt-2 text-lg font-bold text-primary lg:mt-3 lg:text-2xl">
+        Blend
+      </h2>
+      <p class="mb-3 text-xs text-slate-500 md:text-sm lg:mb-6">
+        เมนูมัทฉะเบลนด์สูตรเฉพาะของทางร้าน
+      </p>
       <ul
-        class="grid grid-cols-2 grid-rows-[repeat(4,_auto)] gap-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-3"
+        class="grid grid-cols-2 grid-rows-[repeat(4,_auto)] gap-3 md:grid-cols-3 lg:grid-cols-4"
       >
         {blendMenus.map((product) => <ProductItem product={product} />)}
       </ul>
