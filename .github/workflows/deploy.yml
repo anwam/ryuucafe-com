@@ -1,4 +1,4 @@
-name: Deploy Website
+name: Deploy To S3
 
 on:
   pull_request:

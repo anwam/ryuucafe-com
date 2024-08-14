@@ -4,7 +4,6 @@ import {
   Description,
   Dialog,
   DialogPanel,
-  DialogTitle,
 } from '@headlessui/react'
 import clsx from 'clsx'
 
