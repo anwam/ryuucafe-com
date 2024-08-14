@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/anwam/ryuucafe-com/compare/v1.7.0...v1.7.1) (2024-08-14)
+
+
+### Bug Fixes
+
+* release on released ([1f2dfc5](https://github.com/anwam/ryuucafe-com/commit/1f2dfc584d1d98e2fff886e93137b449f0fc0610))
+
 ## [1.7.0](https://github.com/anwam/ryuucafe-com/compare/v1.6.3...v1.7.0) (2024-08-14)
 
 
