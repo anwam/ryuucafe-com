@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.3](https://github.com/anwam/ryuucafe-com/compare/v1.6.2...v1.6.3) (2024-08-14)
+
+
+### Bug Fixes
+
+* release on branch release ([0d99d28](https://github.com/anwam/ryuucafe-com/commit/0d99d28e7fa0c4f9a743b909ecb9314d9956c2ef))
+* release on branch release [#2](https://github.com/anwam/ryuucafe-com/issues/2) ([78a2d77](https://github.com/anwam/ryuucafe-com/commit/78a2d77593c7fe19cb7f974ce57ca4e14237e30b))
+
 ## [1.6.2](https://github.com/anwam/ryuucafe-com/compare/v1.6.1...v1.6.2) (2024-08-14)
 
 
