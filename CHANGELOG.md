@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.2](https://github.com/anwam/ryuucafe-com/compare/v1.7.1...v1.7.2) (2024-08-15)
+
+
+### Bug Fixes
+
+* update deployment pipeline ([0d1f495](https://github.com/anwam/ryuucafe-com/commit/0d1f4959ea4737d04135b65b1cfce6899d63b0a4))
+
 ## [1.7.1](https://github.com/anwam/ryuucafe-com/compare/v1.7.0...v1.7.1) (2024-08-14)
 
 
