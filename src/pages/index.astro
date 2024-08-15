@@ -1,12 +1,10 @@
 ---
-import type { PageContent, Product } from "../types";
 import ProductItem from "../components/ProductItem.astro";
 import Layout from "@/components/Layout.astro";
 import FeatureImage from "../assets/images/home/feature-1.webp";
 import { Image } from "astro:assets";
 import OrderButton from "@/components/product/OrderButton";
 import { fetchHome } from "src/lib/homeFetcher";
-
 
 const homePageData = await fetchHome();
 const products = homePageData.allProducts;

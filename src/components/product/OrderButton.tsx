@@ -1,27 +1,22 @@
-import { useState } from 'react'
-import {
-  Button,
-  Description,
-  Dialog,
-  DialogPanel,
-} from '@headlessui/react'
-import clsx from 'clsx'
+import { useState } from "react";
+import { Button, Description, Dialog, DialogPanel } from "@headlessui/react";
+import { cn } from "@/utils/*";
 
 type Props = {
-  className?: string
-  children?: React.ReactNode
-}
+  className?: string;
+  children?: React.ReactNode;
+};
 export default function OrderButton({ className, children }: Props) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <Button
         accessKey="Order"
         onClick={() => setIsOpen(true)}
-        className={clsx('btn btn-link  hover:btn-primary', className)}
+        className={cn("btn btn-link hover:btn-primary", className)}
       >
-        {children || 'สั่งซื้อ'}
+        {children || "สั่งซื้อ"}
       </Button>
       <Dialog
         className="relative z-modal"
@@ -74,7 +69,7 @@ export default function OrderButton({ className, children }: Props) {
             <div>
               <Button
                 accessKey="Cancel"
-                className="btn btn-sm btn-primary btn-outline"
+                className="btn btn-outline btn-primary btn-sm"
                 onClick={() => setIsOpen(false)}
               >
                 ปิด
@@ -84,5 +79,5 @@ export default function OrderButton({ className, children }: Props) {
         </div>
       </Dialog>
     </>
-  )
+  );
 }
