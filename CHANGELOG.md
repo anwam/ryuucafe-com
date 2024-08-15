@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/anwam/ryuucafe-com/compare/v1.8.0...v1.9.0) (2024-08-15)
+
+
+### Features
+
+* refactor home page fetcher ([41107bc](https://github.com/anwam/ryuucafe-com/commit/41107bc1fe853ffa25b858142d8f8e360d340b9b))
+
 ## [1.8.0](https://github.com/anwam/ryuucafe-com/compare/v1.7.2...v1.8.0) (2024-08-15)
 
 
