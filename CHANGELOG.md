@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.1](https://github.com/anwam/ryuucafe-com/compare/v1.9.0...v1.9.1) (2024-08-15)
+
+
+### Bug Fixes
+
+* update pipeline version ([744baf2](https://github.com/anwam/ryuucafe-com/commit/744baf25edf6858c1aa85cc6d56608849dee13de))
+
 ## [1.9.0](https://github.com/anwam/ryuucafe-com/compare/v1.8.0...v1.9.0) (2024-08-15)
 
 
