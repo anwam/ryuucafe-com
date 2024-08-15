@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.4](https://github.com/anwam/ryuucafe-com/compare/v1.9.3...v1.9.4) (2024-08-15)
+
+
+### Bug Fixes
+
+* format code ([037dfd4](https://github.com/anwam/ryuucafe-com/commit/037dfd4b95e8c27082a5f76d3584b3ac1ac3e26d))
+
 ## [1.9.3](https://github.com/anwam/ryuucafe-com/compare/v1.9.2...v1.9.3) (2024-08-15)
 
 
