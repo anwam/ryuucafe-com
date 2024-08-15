@@ -1,28 +1,24 @@
-import { useState } from "react";
-import { Button, Description, Dialog, DialogPanel } from "@headlessui/react";
-import { cn } from "@/utils/*";
+import { useState } from 'react'
+import { Button, Description, Dialog, DialogPanel } from '@headlessui/react'
+import { cn } from '@/utils/*'
 
 type Props = {
-  className?: string;
-  children?: React.ReactNode;
-};
+  className?: string
+  children?: React.ReactNode
+}
 export default function OrderButton({ className, children }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <>
       <Button
         accessKey="Order"
         onClick={() => setIsOpen(true)}
-        className={cn("btn btn-link hover:btn-primary", className)}
+        className={cn('btn btn-link hover:btn-primary', className)}
       >
-        {children || "สั่งซื้อ"}
+        {children || 'สั่งซื้อ'}
       </Button>
-      <Dialog
-        className="relative z-modal"
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-      >
+      <Dialog className="relative z-modal" open={isOpen} onClose={() => setIsOpen(false)}>
         <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
@@ -79,5 +75,5 @@ export default function OrderButton({ className, children }: Props) {
         </div>
       </Dialog>
     </>
-  );
+  )
 }

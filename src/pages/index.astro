@@ -1,16 +1,16 @@
 ---
-import ProductItem from "../components/ProductItem.astro";
-import Layout from "@/components/Layout.astro";
-import FeatureImage from "../assets/images/home/feature-1.webp";
-import { Image } from "astro:assets";
-import OrderButton from "@/components/product/OrderButton";
-import { fetchHome } from "src/lib/homeFetcher";
+import ProductItem from '../components/ProductItem.astro'
+import Layout from '@/components/Layout.astro'
+import FeatureImage from '../assets/images/home/feature-1.webp'
+import { Image } from 'astro:assets'
+import OrderButton from '@/components/product/OrderButton'
+import { fetchHome } from 'src/lib/homeFetcher'
 
-const homePageData = await fetchHome();
-const products = homePageData.allProducts;
-const content = homePageData.pageContent;
-const singleMenus = products.filter((product) => product.powderType);
-const blendMenus = products.filter((product) => !product.powderType);
+const homePageData = await fetchHome()
+const products = homePageData.allProducts
+const content = homePageData.pageContent
+const singleMenus = products.filter((product) => product.powderType)
+const blendMenus = products.filter((product) => !product.powderType)
 ---
 
 <Layout>

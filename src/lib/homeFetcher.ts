@@ -1,13 +1,13 @@
-import type { Product, PageContent } from "../types";
+import type { Product, PageContent } from '../types'
 
 export async function fetchHome(): Promise<{
-  allProducts: Product[];
-  pageContent: PageContent;
+  allProducts: Product[]
+  pageContent: PageContent
 }> {
-  const response = await fetch("https://graphql.datocms.com/", {
-    method: "POST",
+  const response = await fetch('https://graphql.datocms.com/', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${import.meta.env.DATOCMS_API_KEY}`,
     },
     body: JSON.stringify({
@@ -58,14 +58,14 @@ export async function fetchHome(): Promise<{
         }
       }`,
     }),
-  });
+  })
 
   const json = (await response.json()) as {
-    data: { allProducts: Product[]; pageContent: PageContent };
-  };
+    data: { allProducts: Product[]; pageContent: PageContent }
+  }
 
   return {
     allProducts: json.data.allProducts,
     pageContent: json.data.pageContent,
-  };
+  }
 }
