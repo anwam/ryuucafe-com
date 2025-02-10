@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.10.0](https://github.com/anwam/ryuucafe-com/compare/v1.9.4...v1.10.0) (2025-02-10)
+
+
+### Features
+
+* add google analytics ([bd3358f](https://github.com/anwam/ryuucafe-com/commit/bd3358fcba40446e00cd7a382a4b6b50ee693813))
+
+
+### Bug Fixes
+
+* feature flag ([8f2bb5e](https://github.com/anwam/ryuucafe-com/commit/8f2bb5eb0f9b9bcba1c46fe9878619614ad978f7))
+
 ## [1.9.4](https://github.com/anwam/ryuucafe-com/compare/v1.9.3...v1.9.4) (2024-08-15)
 
 
