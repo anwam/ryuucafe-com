@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.1](https://github.com/anwam/ryuucafe-com/compare/v1.10.0...v1.10.1) (2025-02-10)
+
+
+### Bug Fixes
+
+* env name ([03d6428](https://github.com/anwam/ryuucafe-com/commit/03d6428b3cecf54ade432ff187981f6f1b4b2d9d))
+
 ## [1.10.0](https://github.com/anwam/ryuucafe-com/compare/v1.9.4...v1.10.0) (2025-02-10)
 
 
