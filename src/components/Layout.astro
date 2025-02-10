@@ -7,10 +7,20 @@ import '../style/global.css'
 import Head from '../modules/seo/Head.astro'
 import Footer from './Footer.astro'
 import Header from './Header.astro'
+
+const GoogleAnalyticsTag = import.meta.env.VITE_GOOGLE_ANALYTICS_TAG
 ---
 
 <html lang="th" data-theme="emerald" class="relative">
   <Head />
+  <script is:inline async src=`https://www.googletagmanager.com/gtag/js?id=${GoogleAnalyticsTag}` type="text/partytown"></script>
+  <script is:inline type="text/partytown">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-9RF0MQKB8J');
+  </script>
   <body class="relative">
     <Header />
     <slot />
