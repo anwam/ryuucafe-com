@@ -1,0 +1,15 @@
+---
+const gaDisabledEnv: string = import.meta.env.VITE_GA_DISABLED
+const GA_DISABLED = Boolean(JSON.parse(gaDisabledEnv.toLowerCase()))
+---
+
+{!GA_DISABLED && (
+    <script is:inline async src=`https://www.googletagmanager.com/gtag/js?id=G-9RF0MQKB8J` type="text/partytown"></script>
+    <script is:inline type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9RF0MQKB8J');
+    </script>
+  )
+}
