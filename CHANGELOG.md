@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.2](https://github.com/anwam/ryuucafe-com/compare/v1.10.1...v1.10.2) (2025-02-10)
+
+
+### Bug Fixes
+
+* env name in workflow ([3441dfe](https://github.com/anwam/ryuucafe-com/commit/3441dfe467992a4d69224c33e006b9a2dd8c8e15))
+
 ## [1.10.1](https://github.com/anwam/ryuucafe-com/compare/v1.10.0...v1.10.1) (2025-02-10)
 
 
