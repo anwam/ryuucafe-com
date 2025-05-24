@@ -15,7 +15,7 @@ const blendMenus = products.filter((product) => !product.powderType)
 
 <Layout>
   <article
-    class="container relative mx-auto flex flex-col gap-y-4 px-2 py-3 lg:px-5 lg:py-5 xl:px-0"
+    class="container relative mx-auto max-w-screen-lg flex flex-col gap-y-4 px-2 py-3 lg:px-5 lg:py-5 xl:px-0"
   >
     <section class="container hero w-full">
       <div
@@ -29,30 +29,27 @@ const blendMenus = products.filter((product) => !product.powderType)
               width={content.heroSection.heroImage.responsiveImage.width}
               srcset={content.heroSection.heroImage.responsiveImage.webpSrcSet}
               alt="feature-image-1"
-              class="rounded-md"
+              class=""
             />
           ) : (
             <Image
               src={FeatureImage}
               alt="feature-image-1"
-              class="rounded-md"
+              class=""
               width={480}
             />
           )
         }
         <div class="flex flex-1 flex-col gap-y-2">
-          <h2 class="text-lg font-bold text-primary md:w-fit">
-            {content.heroSection.heroTitle || `มัทฉะเกรดพิธีการ`}
+          <h2 class="text-lg font-bold text-green-700 md:w-fit">
+            {content.heroSection.heroTitle || `Ceremonial grade matcha`}
           </h2>
           <p
             class="whitespace-pre-line font-ibm-plex-sans-thai text-sm lg:text-base"
           >
             {
               content.heroSection.heroDescription ||
-                `ที่ร้านริว เราใช้ผงมัทฉะระดับ Ceremonial Grade
-            หรือเกรดพิธีการในการชงทุกเมนู เพื่อให้ได้คุณภาพที่ดีที่สุด
-            สร้างรสชาติที่เข้มข้นซับซ้อน มีความอูมามิและกลิ่นหอม
-            สร้างประสบการณ์การดื่มชาขึ้นอีกขั้น`
+              `Ceremonial grade matcha to maximize tea experience in every cups`
             }
           </p>
           <div class="flex gap-x-2">
@@ -69,27 +66,28 @@ const blendMenus = products.filter((product) => !product.powderType)
     </section>
 
     <section id="menu" class="mx-auto flex flex-col gap-y-2">
-      <hr class="border-t border-primary/30" />
-      <h2 class="mt-2 text-lg font-bold text-primary lg:mt-3 lg:text-2xl">
+      <h2 class="mt-2 text-lg font-bold text-green-700 lg:mt-3 lg:text-2xl">
         Single Cultivar
       </h2>
       <p class="mb-3 text-xs text-slate-500 md:text-sm lg:mb-6">
         เมนูมัทฉะสายพันธุ์เดี่ยว
       </p>
       <div
-        class="mb-3 grid grid-cols-2 grid-rows-[repeat(4,_auto)] gap-3 md:grid-cols-3 lg:grid-cols-4"
+        class="mb-3 grid grid-cols-2 grid-rows-[repeat(5,_auto)] gap-2 md:grid-cols-3"
       >
         {singleMenus.map((product) => <ProductItem product={product} />)}
       </div>
-      <hr class="border-t border-primary/30" />
-      <h2 class="mt-2 text-lg font-bold text-primary lg:mt-3 lg:text-2xl">
+      </section>
+      <section>
+
+      <h2 class="mt-2 text-lg font-bold text-green-700 lg:mt-3 lg:text-2xl">
         Blend
       </h2>
       <p class="mb-3 text-xs text-slate-500 md:text-sm lg:mb-6">
         เมนูมัทฉะเบลนด์สูตรเฉพาะของทางร้าน
       </p>
       <ul
-        class="grid grid-cols-2 grid-rows-[repeat(4,_auto)] gap-3 md:grid-cols-3 lg:grid-cols-4"
+        class="grid grid-cols-2 grid-rows-[repeat(5,_auto)] gap-2 md:grid-cols-3"
       >
         {blendMenus.map((product) => <ProductItem product={product} />)}
       </ul>
