@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.10.3](https://github.com/anwam/ryuucafe-com/compare/v1.10.2...v1.10.3) (2025-05-24)
+
+
+### Bug Fixes
+
+* remove base font-size ([d1509af](https://github.com/anwam/ryuucafe-com/commit/d1509af004809cad8aca90a7334acd6551049937))
+* remove base font-size ([ece70c8](https://github.com/anwam/ryuucafe-com/commit/ece70c811b7e022a13d41fb04c4230ff34e75a60))
+
 ## [1.10.2](https://github.com/anwam/ryuucafe-com/compare/v1.10.1...v1.10.2) (2025-02-10)
 
 
