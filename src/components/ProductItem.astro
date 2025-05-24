@@ -9,35 +9,23 @@ const { product } = Astro.props
 ---
 
 <div
-  class="relative row-span-4 grid grid-rows-subgrid gap-1 overflow-hidden rounded-md bg-base-100 shadow transition-all hover:shadow-primary lg:gap-2"
+  class="relative row-span-5 grid grid-rows-subgrid gap-1 overflow-hidden bg-base-100 shadow"
 >
-  <div>
-    <Picture
-      src={product.coverImage.responsiveImage.src}
-      sizes={product.coverImage.responsiveImage.sizes}
-      srcset={product.coverImage.responsiveImage.srcSet}
-      width={product.coverImage.responsiveImage.width}
-      height={product.coverImage.responsiveImage.height}
-      alt={product.name}
-      decoding={"async"}
-      densities={[1.5, 2]}
-      loading="eager"
-    />
-
-    {
-      product.bestSeller ? (
-        <div class="badge badge-accent absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold text-white shadow md:hidden lg:right-2 lg:top-2">
-          ขายดี
-        </div>
-      ) : product.recommended ? (
-        <div class="badge badge-primary absolute right-1 top-1 z-badge rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs font-bold shadow md:hidden lg:right-2 lg:top-2">
-          Recommended
-        </div>
-      ) : null
-    }
+  <Picture
+    src={product.coverImage.responsiveImage.src}
+    sizes={product.coverImage.responsiveImage.sizes}
+    srcset={product.coverImage.responsiveImage.srcSet}
+    width={product.coverImage.responsiveImage.width}
+    height={product.coverImage.responsiveImage.height}
+    alt={product.name}
+    decoding={"async"}
+    densities={[1.5, 2]}
+    loading="eager"
+  />
+  <div class="flex flex-wrap gap-x-1 gap-y-1 px-1.5">
+    <h3 class="font-extrabold text-green-700">{product.name}</h3>
   </div>
-  <div class="flex flex-wrap gap-x-2 gap-y-1 px-1.5 md:px-2">
-    <h3 class="text-sm font-bold md:text-base">{product.name}</h3>
+  <div class="flex items-center px-2">
     {
       product.bestSeller && (
         <div class="badge badge-accent hidden rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs text-white md:inline-flex">
@@ -47,7 +35,7 @@ const { product } = Astro.props
     }
     {
       product.recommended && (
-        <div class="badge badge-primary hidden rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs text-white md:inline-flex">
+        <div class="badge bg-green-700 shadow-none border-none hidden rounded-full px-2 py-1 font-ibm-plex-sans-thai text-xs text-white md:inline-flex">
           แนะนำ
         </div>
       )
@@ -56,7 +44,7 @@ const { product } = Astro.props
   <div class="px-1.5 md:px-2">
     {
       product.description && (
-        <p class="whitespace-pre-line text-pretty text-xs text-neutral-600 md:text-sm lg:text-base">
+        <p class="whitespace-pre-line text-pretty text-xs text-neutral-600">
           {product.description}
         </p>
       )
@@ -70,7 +58,7 @@ const { product } = Astro.props
             .split(",")
             .map((tn) => tn.trim())
             .map((tn) => (
-              <span class="rounded-box border border-primary px-1 py-0.5 font-poppins text-[0.625rem] text-primary">
+              <span class="rounded-box border border-green-700 px-1 py-0.5 font-poppins text-[0.625rem] text-green-700">
                 {tn}
               </span>
             ))}

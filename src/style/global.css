@@ -17,3 +17,9 @@ p,
 span {
   font-family: "Esteban", "Sarabun";
 }
+
+@layer base {
+  html {
+    font-size: 15px;
+  }
+}

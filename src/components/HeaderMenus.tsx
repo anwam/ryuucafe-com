@@ -51,7 +51,7 @@ function HeaderMenus({
           {Menus.map((menu) => (
             <li key={menu.name}>
               <Button
-                className="btn btn-link btn-primary btn-sm"
+                className="btn btn-link text-green-700 btn-sm"
                 onClick={(_e) => scrollToNode(menu.link)}
               >
                 {menu.name}
