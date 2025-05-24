@@ -19,7 +19,4 @@ span {
 }
 
 @layer base {
-  html {
-    font-size: 15px;
-  }
 }
