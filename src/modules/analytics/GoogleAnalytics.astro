@@ -1,10 +1,10 @@
 ---
 const gaDisabledEnv: string = import.meta.env.PUBLIC_GA_DISABLED
-const GA_DISABLED = Boolean(JSON.parse(gaDisabledEnv.toLowerCase()))
+const GA_DISABLED = Boolean(JSON.parse(gaDisabledEnv?.toLowerCase() || 'false'))
 ---
 
 {!GA_DISABLED && (
-    <script is:inline async src=`https://www.googletagmanager.com/gtag/js?id=G-9RF0MQKB8J` type="text/partytown"></script>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-9RF0MQKB8J" type="text/partytown"></script>
     <script is:inline type="text/partytown">
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}

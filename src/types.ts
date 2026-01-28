@@ -33,6 +33,11 @@ export interface HeroSection {
   heroImage: HeroImage
   heroTitle: string
   heroDescription: string
+  heroBanner?: HeroBanner[]
+}
+
+export interface HeroBanner {
+  responsiveImage: ResponsiveImage
 }
 
 export interface HeroImage {

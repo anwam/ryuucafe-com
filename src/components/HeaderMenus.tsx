@@ -1,5 +1,6 @@
-import { scrollToNode } from 'src/utils/scrollToNode'
 import { Button } from '@headlessui/react'
+import { useState } from 'react'
+import { scrollToNode } from 'src/utils/scrollToNode'
 import OrderButton from './product/OrderButton'
 
 const Menus = [
@@ -13,22 +14,31 @@ const Menus = [
   },
 ]
 
-function HambugerIcon() {
+function HambugerIcon({ isOpen }: { isOpen: boolean }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-5 w-5"
+      className="h-6 w-6"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
     >
       <title>HamburgerIcon</title>
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M4 6h16M4 12h8m-8 6h16"
-      />
+      {isOpen ? (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      ) : (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      )}
     </svg>
   )
 }
@@ -38,38 +48,63 @@ function HeaderMenus({
 }: {
   vairiant?: 'mobile' | 'desktop'
 }) {
+  const [isOpen, setIsOpen] = useState(false)
+
   if (vairiant === 'mobile') {
     return (
-      <div className="dropdown">
-        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-          <HambugerIcon />
-        </div>
-        <ul
-          tabIndex={-1}
-          className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+      <div className="relative">
+        <Button
+          onClick={() => setIsOpen(!isOpen)}
+          className="btn btn-ghost btn-circle text-shamrock-900 lg:hidden"
+          aria-label="Toggle menu"
         >
-          {Menus.map((menu) => (
-            <li key={menu.name}>
-              <Button
-                className="btn btn-link text-green-700 btn-sm"
-                onClick={(_e) => scrollToNode(menu.link)}
-              >
-                {menu.name}
-              </Button>
-            </li>
-          ))}
-        </ul>
+          <HambugerIcon isOpen={isOpen} />
+        </Button>
+        {isOpen && (
+          <>
+            {/* Backdrop */}
+            <button
+              type="button"
+              className="fixed inset-0 z-40 bg-black/20 cursor-default"
+              onClick={() => setIsOpen(false)}
+              onKeyDown={(e) => e.key === 'Escape' && setIsOpen(false)}
+              aria-label="Close menu"
+              tabIndex={-1}
+            />
+            {/* Menu */}
+            <div className="absolute right-0 top-full z-50 mt-2 w-56 rounded-box bg-white border border-shamrock-100 p-3 shadow-xl shadow-shamrock-900/10">
+              <ul className="menu space-y-1">
+                {Menus.map((menu) => (
+                  <li key={menu.name}>
+                    <Button
+                      className="w-full rounded-lg px-4 py-2.5 text-left text-sm font-medium text-gray-700 transition-colors hover:bg-shamrock-50 hover:text-shamrock-700"
+                      onClick={() => {
+                        scrollToNode(menu.link)
+                        setIsOpen(false)
+                      }}
+                    >
+                      {menu.name}
+                    </Button>
+                  </li>
+                ))}
+                <li className="mt-3 border-t border-shamrock-100 pt-3">
+                  <OrderButton className="btn-sm w-full bg-shamrock-500 text-white border-none hover:bg-shamrock-600 font-bold" />
+                </li>
+              </ul>
+            </div>
+          </>
+        )}
       </div>
     )
   }
 
   return (
-    <div className="navbar-end flex items-center justify-end">
-      <ul className="menu menu-horizontal hidden gap-x-1 px-1 lg:flex">
+    <div className="flex items-center gap-x-6">
+      <ul className="flex items-center gap-x-8">
         {Menus.map((menu) => (
           <li key={menu.name}>
             <Button
-              className="btn btn-link hover:btn hover:btn-primary"
+              className="relative font-poppins text-sm font-medium text-gray-600 hover:text-shamrock-700 transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-shamrock-500 after:transition-all after:duration-300 hover:after:w-full"
               onClick={(_e) => scrollToNode(menu.link)}
             >
               {menu.name}
@@ -77,7 +112,7 @@ function HeaderMenus({
           </li>
         ))}
       </ul>
-      <OrderButton />
+      <OrderButton className="btn btn-sm bg-shamrock-600 text-white border-none hover:bg-shamrock-700 rounded-full px-6 font-bold shadow-md shadow-shamrock-600/20 transition-all hover:shadow-lg hover:shadow-shamrock-600/30" />
     </div>
   )
 }

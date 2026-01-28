@@ -1,4 +1,4 @@
-import type { Product, PageContent } from '../types'
+import type { PageContent, Product } from '../types'
 
 export async function fetchHome(): Promise<{
   allProducts: Product[]

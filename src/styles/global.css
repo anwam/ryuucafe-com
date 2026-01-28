@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    @apply antialiased scroll-smooth;
+  }
+  
+  body {
+    @apply min-h-screen flex flex-col;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-poppins);
+  }
+
+  p, span, div {
+    font-family: var(--font-family-sarabun);
+  }
+
+  .font-esteban {
+    font-family: var(--font-family-esteban);
+  }
+}
+
+@theme {
+  /* Colros */
+  --color-malachite-50: oklch(97.33% 0.027 153.89);
+  --color-malachite-100: oklch(94.53% 0.054 152.63);
+  --color-malachite-200: oklch(89.49% 0.106 151.41);
+  --color-malachite-300: oklch(85.04% 0.155 150.19);
+  --color-malachite-400: oklch(81.23% 0.197 148.29);
+  --color-malachite-500: oklch(78.40% 0.230 146.16);
+  --color-malachite-600: oklch(66.21% 0.192 146.34);
+  --color-malachite-700: oklch(53.70% 0.153 146.61);
+  --color-malachite-800: oklch(40.40% 0.112 146.82);
+  --color-malachite-900: oklch(25.92% 0.065 147.95);
+  --color-malachite-950: oklch(21.26% 0.050 148.73);
+  --color-shamrock-50: oklch(96.55% 0.012 153.67);
+  --color-shamrock-100: oklch(93.29% 0.025 152.87);
+  --color-shamrock-200: oklch(86.60% 0.050 153.40);
+  --color-shamrock-300: oklch(79.91% 0.076 152.31);
+  --color-shamrock-400: oklch(73.29% 0.101 151.20);
+  --color-shamrock-500: oklch(66.81% 0.126 149.88);
+  --color-shamrock-600: oklch(56.82% 0.105 150.06);
+  --color-shamrock-700: oklch(46.37% 0.083 150.36);
+  --color-shamrock-800: oklch(35.29% 0.059 150.94);
+  --color-shamrock-900: oklch(23.24% 0.034 150.57);
+  --color-shamrock-950: oklch(19.43% 0.025 151.41);
+
+
+  --color-primary: var(--color-malachite-500);
+
+
+
+  /* Z-index */
+  --z-index-container: 1;
+  --z-index-badge: 2;
+  --z-index-header: 100;
+  --z-index-modal: 200;
+
+  /* Font Family */
+
+  --font-family-poppins: "Poppins", sans-serif;
+  --font-family-ibm-plex-sans-thai: "IBM Plex Sans Thai", sans-serif;
+  --font-family-esteban: "Esteban", serif;
+  --font-family-sarabun: "Sarabun", sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  /* Button utilities */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-shamrock-500 focus:ring-offset-2;
+  }
+  
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+  
+  .btn-md {
+    @apply px-4 py-2 text-sm;
+  }
+  
+  .btn-wide {
+    @apply min-w-32;
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent hover:bg-gray-100;
+  }
+  
+  .btn-circle {
+    @apply h-10 w-10 rounded-full p-0;
+  }
+  
+  .btn-primary {
+    @apply bg-shamrock-500 text-white hover:bg-shamrock-600;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-current bg-transparent;
+  }
+
+  /* Dropdown utilities */
+  .dropdown {
+    @apply relative inline-block;
+  }
+  
+  .dropdown-end {
+    @apply text-right;
+  }
+  
+  .dropdown-content {
+    @apply absolute hidden w-52;
+  }
+  
+  .dropdown:focus-within .dropdown-content,
+  .dropdown [tabIndex]:focus + .dropdown-content {
+    @apply block;
+  }
+  
+  .dropdown-bottom .dropdown-content {
+    @apply top-full;
+  }
+  
+  .dropdown-end .dropdown-content {
+    @apply right-0;
+  }
+
+  /* Menu utilities */
+  .menu {
+    @apply flex flex-col gap-1;
+  }
+  
+  .menu li {
+    @apply list-none;
+  }
+
+  /* Badge utility */
+  .badge {
+    @apply inline-flex items-center justify-center rounded-md px-2 py-1 text-xs font-semibold;
+  }
+
+  /* Rounded box utility */
+  .rounded-box {
+    @apply rounded-2xl;
+  }
+
+  /* Base utilities */
+  .bg-base-100 {
+    @apply bg-white;
+  }
+  
+  .text-base-content {
+    @apply text-gray-900;
+  }
+
+  /* Link utilities */
+  .link {
+    @apply underline hover:no-underline;
+  }
+  
+  .link-green-700 {
+    @apply text-shamrock-700 hover:text-shamrock-600;
+  }
+
+  /* Footer utility */
+  .footer {
+    @apply grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3;
+  }
+}

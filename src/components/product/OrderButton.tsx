@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { Button, Description, Dialog, DialogPanel } from '@headlessui/react'
 import { cn } from '@/utils/*'
+import { Button, Description, Dialog, DialogPanel } from '@headlessui/react'
+import { useState } from 'react'
 
 type Props = {
   className?: string
@@ -11,11 +11,7 @@ export default function OrderButton({ className, children }: Props) {
 
   return (
     <>
-      <Button
-        accessKey="Order"
-        onClick={() => setIsOpen(true)}
-        className={cn('btn btn-link hover:btn-primary', className)}
-      >
+      <Button accessKey="Order" onClick={() => setIsOpen(true)} className={cn('btn', className)}>
         {children || 'สั่งซื้อ'}
       </Button>
       <Dialog className="relative z-modal" open={isOpen} onClose={() => setIsOpen(false)}>

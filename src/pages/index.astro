@@ -14,83 +14,142 @@ const blendMenus = products.filter((product) => !product.powderType)
 ---
 
 <Layout>
-  <article
-    class="container relative mx-auto max-w-screen-lg flex flex-col gap-y-4 px-2 py-3 lg:px-5 lg:py-5 xl:px-0"
-  >
-    <section class="container hero w-full">
-      <div
-        class="container flex w-full flex-col justify-center gap-x-2 gap-y-2 p-0 md:flex-row md:items-center md:gap-x-4 lg:gap-x-8"
-      >
-        {
-          content.heroSection.heroImage.responsiveImage ? (
-            <Image
-              src={content.heroSection.heroImage.responsiveImage.src}
-              height={content.heroSection.heroImage.responsiveImage.height}
-              width={content.heroSection.heroImage.responsiveImage.width}
-              srcset={content.heroSection.heroImage.responsiveImage.webpSrcSet}
-              alt="feature-image-1"
-              class=""
-            />
-          ) : (
-            <Image
-              src={FeatureImage}
-              alt="feature-image-1"
-              class=""
-              width={480}
-            />
-          )
-        }
-        <div class="flex flex-1 flex-col gap-y-2">
-          <h2 class="text-lg font-bold text-green-700 md:w-fit">
-            {content.heroSection.heroTitle || `Ceremonial grade matcha`}
-          </h2>
-          <p
-            class="whitespace-pre-line font-ibm-plex-sans-thai text-sm lg:text-base"
-          >
-            {
-              content.heroSection.heroDescription ||
-              `Ceremonial grade matcha to maximize tea experience in every cups`
-            }
-          </p>
-          <div class="flex gap-x-2">
-            <a href="#contact" class="btn btn-primary btn-sm">มาหาเรา</a>
-            <OrderButton
-              className="btn btn-outline btn-primary btn-sm"
-              client:only="react"
-            >
-              สั่งซื้อชาเขียว
-            </OrderButton>
+ <article class="relative w-full overflow-hidden">
+    {/* Hero Section */}
+    <section class="relative w-full min-h-150 lg:min-h-175 py-16 lg:py-20 bg-linear-to-br from-shamrock-700 via-shamrock-600 to-shamrock-800 text-shamrock-50 overflow-hidden">
+      {/* Animated background pattern */}
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-shamrock-300 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-malachite-400 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+      </div>
+      
+      <div class="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full">
+        <div class="flex flex-col-reverse gap-10 lg:flex-row lg:items-center lg:gap-16 min-h-125 lg:min-h-150">
+          {/* Content Side */}
+          <div class="flex flex-1 flex-col items-start justify-center gap-y-8">
+            {/* Badge */}
+            <div class="inline-flex items-center gap-2 rounded-full bg-shamrock-800/50 backdrop-blur-sm px-4 py-2 text-sm font-medium border border-shamrock-400/30">
+              <svg class="h-4 w-4 text-shamrock-300" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <span class="text-shamrock-100">Ceremonial Grade</span>
+            </div>
+
+            {/* Main Heading */}
+            <div class="space-y-4">
+              <h1 class="font-poppins text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight text-balance">
+                {content.heroSection.heroTitle || (
+                  <>
+                    <span class="block">Small Space,</span>
+                    <span class="block text-shamrock-200">Great Matcha.</span>
+                  </>
+                )}
+              </h1>
+              <div class="h-1.5 w-24 rounded-full bg-linear-to-r from-shamrock-300 to-malachite-300"></div>
+            </div>
+
+            {/* Description */}
+            <p class="font-ibm-plex-sans-thai text-lg sm:text-xl lg:text-2xl leading-relaxed text-shamrock-100/95 max-w-2xl text-balance whitespace-pre-line">
+              {content.heroSection.heroDescription ||
+                `5 คาแรคเตอร์มัทฉะที่คุณต้องลอง\nUji Hikari • Saemidori • Yabukita • Tsuyuhikari • Okumidori\nปรุงสดใหม่แก้วต่อแก้วเพื่อรสชาติที่ดีที่สุด`}
+            </p>
+
+            {/* CTA Buttons */}
+            <div class="flex flex-col sm:flex-row flex-wrap gap-4 pt-4">
+              <OrderButton
+                className="bg-shamrock-200 hover:bg-shamrock-100 text-shamrock-900 px-8 py-4 text-lg font-bold rounded-full transition-all duration-300 shadow-lg shadow-shamrock-900/20 hover:shadow-xl hover:shadow-shamrock-900/30 hover:scale-105"
+                client:only="react"
+              >
+                Order now
+              </OrderButton>
+              <a 
+                href="#contact" 
+                class="inline-flex items-center justify-center gap-2 bg-shamrock-800/30 hover:bg-shamrock-800/50 backdrop-blur-sm border-2 border-shamrock-300/50 hover:border-shamrock-300 text-shamrock-50 px-8 py-4 text-lg rounded-full font-medium transition-all duration-300"
+              >
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                หน้าร้าน
+              </a>
+            </div>
           </div>
+          
+          {/* Image Side */}
+          <div class="relative flex-1 flex items-center justify-center lg:justify-end">
+            {
+              content.heroSection.heroImage.responsiveImage ? (
+                <Image
+                  src={content.heroSection.heroImage.responsiveImage.src}
+                  height={content.heroSection.heroImage.responsiveImage.height}
+                  width={content.heroSection.heroImage.responsiveImage.width}
+                  srcset={content.heroSection.heroImage.responsiveImage.webpSrcSet}
+                  alt="Matcha Hero"
+                  class="h-full w-full object-cover shadow-2xl shadow-shamrock-900/20 rounded border-8 border-shamrock-50"
+                />
+              ) : (
+                <Image
+                  src={FeatureImage}
+                  alt="Matcha Hero"
+                  class="h-full w-full object-cover"
+                  width={640}
+                />
+              )
+            }
+          </div>
+        </div>
+      </div>
+
+      {/* Wave divider */}
+      <div class="absolute bottom-0 left-0 right-0">
+        <svg class="w-full h-12 sm:h-16 lg:h-20 text-white" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="currentColor"/>
+        </svg>
+      </div>
+    </section>
+
+    {/* Single Cultivar Section */}
+    <section id="menu" class="transform-gpu py-12 lg:py-24 bg-white relative z-10 overflow-hidden">
+      {/* Background decoration */}
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none opacity-50">
+        <div class="absolute top-20 left-10 w-64 h-64 bg-shamrock-50 rounded-full blur-3xl mix-blend-multiply"></div>
+        <div class="absolute bottom-20 right-10 w-80 h-80 bg-malachite-50 rounded-full blur-3xl mix-blend-multiply"></div>
+      </div>
+
+      <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
+        <div class="mb-12 lg:mb-16 text-center">
+            <span class="text-shamrock-600 font-medium tracking-widest text-sm uppercase">Authentic Taste</span>
+            <h2 class="mt-2 text-3xl font-bold text-gray-900 lg:text-4xl font-esteban">
+                Single Cultivar Matcha
+            </h2>
+            <div class="mt-4 mx-auto w-16 h-1 bg-shamrock-400 rounded-full"></div>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto font-sarabun">
+                สัมผัสรสชาติอันเป็นเอกลักษณ์ของมัทฉะสายพันธุ์เดี่ยว ที่ผ่านการคัดสรรอย่างพิถีพิถันจากแหล่งเพาะปลูกชั้นยอด
+            </p>
+        </div>
+        <div class="grid grid-cols-1 gap-6 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {singleMenus.map((product) => <ProductItem product={product} />)}
         </div>
       </div>
     </section>
 
-    <section id="menu" class="mx-auto flex flex-col gap-y-2">
-      <h2 class="mt-2 text-lg font-bold text-green-700 lg:mt-3 lg:text-2xl">
-        Single Cultivar
-      </h2>
-      <p class="mb-3 text-xs text-slate-500 md:text-sm lg:mb-6">
-        เมนูมัทฉะสายพันธุ์เดี่ยว
-      </p>
-      <div
-        class="mb-3 grid grid-cols-2 grid-rows-[repeat(5,_auto)] gap-2 md:grid-cols-3"
-      >
-        {singleMenus.map((product) => <ProductItem product={product} />)}
+    {/* Blend Section */}
+    <section class="py-12 lg:py-24 bg-zinc-50/50 relative z-10">
+      <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-12 lg:mb-16 text-center">
+            <span class="text-shamrock-600 font-medium tracking-widest text-sm uppercase">Perfect Harmony</span>
+            <h2 class="mt-2 text-3xl font-bold text-gray-900 lg:text-4xl font-esteban">
+                House Blends
+            </h2>
+            <div class="mt-4 mx-auto w-16 h-1 bg-shamrock-400 rounded-full"></div>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto font-sarabun">
+                การผสมผสานมัทฉะหลากหลายสายพันธุ์อย่างลงตัว เพื่อให้ได้รสชาติและกลิ่นสัมผัสที่ซับซ้อนและน่าจดจำ
+            </p>
+        </div>
+        <ul class="grid grid-cols-1 gap-6 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {blendMenus.map((product) => <ProductItem product={product} />)}
+        </ul>
       </div>
-      </section>
-      <section>
-
-      <h2 class="mt-2 text-lg font-bold text-green-700 lg:mt-3 lg:text-2xl">
-        Blend
-      </h2>
-      <p class="mb-3 text-xs text-slate-500 md:text-sm lg:mb-6">
-        เมนูมัทฉะเบลนด์สูตรเฉพาะของทางร้าน
-      </p>
-      <ul
-        class="grid grid-cols-2 grid-rows-[repeat(5,_auto)] gap-2 md:grid-cols-3"
-      >
-        {blendMenus.map((product) => <ProductItem product={product} />)}
-      </ul>
     </section>
   </article>
 </Layout>
