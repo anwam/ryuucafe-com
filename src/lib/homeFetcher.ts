@@ -75,6 +75,8 @@ export async function fetchHome(): Promise<{
     data: { allProducts: Product[]; pageContent: PageContent }
   }
 
+  console.log({ heroBanner: JSON.stringify(json.data.pageContent.heroSection.heroBanner) })
+
   return {
     allProducts: json.data.allProducts,
     pageContent: json.data.pageContent,

@@ -291,4 +291,8 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  html, body, main, article {
+    @apply min-h-full h-auto;
+  }
 }
