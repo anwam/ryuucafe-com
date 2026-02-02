@@ -34,12 +34,14 @@ export function HeroCarousel({ banners, fallbackImage, className }: HeroCarousel
     setCount(api.scrollSnapList().length)
     setCurrent(api.selectedScrollSnap() + 1)
 
-    api.on('select', () => {
+    const onSelect = () => {
       setCurrent(api.selectedScrollSnap() + 1)
-    })
+    }
+
+    api.on('select', onSelect)
 
     // Simple autoplay interval (only if multiple items)
-    let intervalId: ReturnType<typeof setInterval>
+    let intervalId: ReturnType<typeof setInterval> | undefined
     if (items.length > 1) {
       intervalId = setInterval(() => {
         if (api.canScrollNext()) {
@@ -50,7 +52,12 @@ export function HeroCarousel({ banners, fallbackImage, className }: HeroCarousel
       }, 5000)
     }
 
-    return () => clearInterval(intervalId)
+    return () => {
+      api.off('select', onSelect)
+      if (intervalId) {
+        clearInterval(intervalId)
+      }
+    }
   }, [api, items.length])
 
   if (items.length === 0) return null

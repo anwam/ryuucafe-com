@@ -15,30 +15,6 @@ const blendMenus = products.filter((product) => !product.powderType)
 
 <Layout>
  <article class="relative w-full overflow-hidden">
-    {/* Image Side */}
-    <div class="relative flex-1 flex items-center justify-center h-full bg-white">
-      {
-        ((content.heroSection.heroBanner?.length ?? 0) > 0) ? (
-          <HeroCarousel
-            client:load
-            banners={content.heroSection.heroBanner}
-            fallbackImage={content.heroSection.heroImage}
-            className="w-full max-w-full h-full"
-          />
-        ) : (
-          <div class="relative w-full h-full min-h-100 overflow-hidden">
-            <Image
-              src={content.heroSection.heroImage?.responsiveImage.src || ''}
-              alt="Matcha Hero"
-              class="h-full w-full object-cover"
-              width={640}
-              height={content.heroSection.heroImage?.responsiveImage.height || 480}
-            />
-          </div>
-        )
-      }
-    </div>
-
     {/* Hero Section */}
     <section class="relative w-full min-h-150 lg:min-h-175 py-16 lg:py-20 bg-linear-to-br from-shamrock-700 via-shamrock-600 to-shamrock-800 text-shamrock-50 overflow-hidden">
       {/* Animated background pattern */}
@@ -97,6 +73,30 @@ const blendMenus = products.filter((product) => !product.powderType)
                 หน้าร้าน
               </a>
             </div>
+          </div>
+
+          {/* Image Side */}
+          <div class="flex-1 flex items-center justify-center h-full">
+            {
+              ((content.heroSection.heroBanner?.length ?? 0) > 0) ? (
+                <HeroCarousel
+                  client:load
+                  banners={content.heroSection.heroBanner}
+                  fallbackImage={content.heroSection.heroImage}
+                  className="w-full max-w-full h-full"
+                />
+              ) : (
+                <div class="relative w-full h-full min-h-100 overflow-hidden">
+                  <Image
+                    src={content.heroSection.heroImage.responsiveImage.src}
+                    alt="Matcha Hero"
+                    class="h-full w-full object-cover"
+                    width={640}
+                    height={content.heroSection.heroImage.responsiveImage.height}
+                  />
+                </div>
+              )
+            }
           </div>
           
         </div>
