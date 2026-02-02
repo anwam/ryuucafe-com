@@ -1,4 +1,4 @@
-import { cn } from '@/utils/*'
+import { cn } from '@/utils/cn'
 import { Button, Description, Dialog, DialogPanel } from '@headlessui/react'
 import { useState } from 'react'
 
@@ -18,7 +18,7 @@ export default function OrderButton({ className, children }: Props) {
         <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-          <DialogPanel className="max-w-screen-md space-y-4 rounded-box border bg-base-100 p-3 shadow-lg lg:p-6">
+          <DialogPanel className="max-w-3xl space-y-4 rounded-box border bg-base-100 p-3 shadow-lg lg:p-6">
             <Description className="font-ibm-plex-sans-thai">
               <b>
                 <i>สามารถสั่งซื้อได้ที่ Delivery App ทุกแพลตฟอร์ม</i>

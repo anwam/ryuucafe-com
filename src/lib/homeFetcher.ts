@@ -54,6 +54,17 @@ export async function fetchHome(): Promise<{
             }
             heroTitle
             heroDescription
+            heroBanner {
+              responsiveImage(imgixParams: {w: 1200, h: 600, fm: webp, q: 90}) {
+                sizes
+                srcSet
+                webpSrcSet
+                alt
+                src
+                width
+                height
+              }
+            }
           }
         }
       }`,
