@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.11.0](https://github.com/anwam/ryuucafe-com/compare/v1.10.3...v1.11.0) (2026-02-02)
+
+
+### Features
+
+* add HeroCarousel component and integrate it into the homepage ([f06dfcd](https://github.com/anwam/ryuucafe-com/commit/f06dfcdae76593854f3c08bdf3bb54bbb624fcec))
+* add HeroCarousel component and integrate it into the homepage ([bcc71e2](https://github.com/anwam/ryuucafe-com/commit/bcc71e28b0cb3fbfa281956e7dd9ce457b9e2238))
+
+
+### Bug Fixes
+
+* address code review feedback for carousel and layout ([21a715d](https://github.com/anwam/ryuucafe-com/commit/21a715d05deb31833ded903dbb18824250b47e80))
+
 ## [1.10.3](https://github.com/anwam/ryuucafe-com/compare/v1.10.2...v1.10.3) (2025-05-24)
 
 
