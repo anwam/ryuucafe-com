@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.11.1](https://github.com/anwam/ryuucafe-com/compare/v1.11.0...v1.11.1) (2026-02-02)
+
+
+### Bug Fixes
+
+* update HeroCarousel styles and improve layout consistency ([bb4a61b](https://github.com/anwam/ryuucafe-com/commit/bb4a61bf2b46dd776155fb8d62ee67ee3ddf413d))
+* update HeroCarousel styles and improve layout consistency ([ef92cfb](https://github.com/anwam/ryuucafe-com/commit/ef92cfbeb7819cb14d634d9bcb9ab5673369b4e7))
+
 ## [1.11.0](https://github.com/anwam/ryuucafe-com/compare/v1.10.3...v1.11.0) (2026-02-02)
 
 
