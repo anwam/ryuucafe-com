@@ -1,9 +1,9 @@
 ---
 import ProductItem from '../components/ProductItem.astro'
 import Layout from '@/components/Layout.astro'
-import FeatureImage from '../assets/images/home/feature-1.webp'
 import { Image } from 'astro:assets'
 import OrderButton from '@/components/product/OrderButton'
+import { HeroCarousel } from '@/components/HeroCarousel'
 import { fetchHome } from 'src/lib/homeFetcher'
 
 const homePageData = await fetchHome()
@@ -15,6 +15,30 @@ const blendMenus = products.filter((product) => !product.powderType)
 
 <Layout>
  <article class="relative w-full overflow-hidden">
+    {/* Image Side */}
+    <div class="relative flex-1 flex items-center justify-center h-full bg-white">
+      {
+        ((content.heroSection.heroBanner?.length ?? 0) > 0) ? (
+          <HeroCarousel
+            client:load
+            banners={content.heroSection.heroBanner}
+            fallbackImage={content.heroSection.heroImage}
+            className="w-full max-w-full h-full"
+          />
+        ) : (
+          <div class="relative w-full h-full min-h-100 overflow-hidden">
+            <Image
+              src={content.heroSection.heroImage?.responsiveImage.src || ''}
+              alt="Matcha Hero"
+              class="h-full w-full object-cover"
+              width={640}
+              height={content.heroSection.heroImage?.responsiveImage.height || 480}
+            />
+          </div>
+        )
+      }
+    </div>
+
     {/* Hero Section */}
     <section class="relative w-full min-h-150 lg:min-h-175 py-16 lg:py-20 bg-linear-to-br from-shamrock-700 via-shamrock-600 to-shamrock-800 text-shamrock-50 overflow-hidden">
       {/* Animated background pattern */}
@@ -75,28 +99,6 @@ const blendMenus = products.filter((product) => !product.powderType)
             </div>
           </div>
           
-          {/* Image Side */}
-          <div class="relative flex-1 flex items-center justify-center lg:justify-end">
-            {
-              content.heroSection.heroImage.responsiveImage ? (
-                <Image
-                  src={content.heroSection.heroImage.responsiveImage.src}
-                  height={content.heroSection.heroImage.responsiveImage.height}
-                  width={content.heroSection.heroImage.responsiveImage.width}
-                  srcset={content.heroSection.heroImage.responsiveImage.webpSrcSet}
-                  alt="Matcha Hero"
-                  class="h-full w-full object-cover shadow-2xl shadow-shamrock-900/20 rounded border-8 border-shamrock-50"
-                />
-              ) : (
-                <Image
-                  src={FeatureImage}
-                  alt="Matcha Hero"
-                  class="h-full w-full object-cover"
-                  width={640}
-                />
-              )
-            }
-          </div>
         </div>
       </div>
 
@@ -134,7 +136,7 @@ const blendMenus = products.filter((product) => !product.powderType)
     </section>
 
     {/* Blend Section */}
-    <section class="py-12 lg:py-24 bg-zinc-50/50 relative z-10">
+    <section class="py-12 lg:py-24 bg-shamrock-50 relative z-10">
       <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mb-12 lg:mb-16 text-center">
             <span class="text-shamrock-600 font-medium tracking-widest text-sm uppercase">Perfect Harmony</span>

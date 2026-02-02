@@ -7,7 +7,7 @@
         "src/components/*"
       ],
       "@/utils/*": [
-        "src/lib/utils"
+        "src/utils/*"
       ],
     },
     "jsx": "react-jsx",

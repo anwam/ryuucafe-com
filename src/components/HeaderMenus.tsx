@@ -1,6 +1,6 @@
+import { scrollToNode } from '@/utils/scrollToNode'
 import { Button } from '@headlessui/react'
 import { useState } from 'react'
-import { scrollToNode } from 'src/utils/scrollToNode'
 import OrderButton from './product/OrderButton'
 
 const Menus = [
