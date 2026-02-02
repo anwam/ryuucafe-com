@@ -64,18 +64,18 @@ export function HeroCarousel({ banners, fallbackImage, className }: HeroCarousel
 
   return (
     <div className={cn('relative w-full h-full min-h-100 lg:min-h-125', className)}>
-      <div className="absolute inset-0 overflow-hidden bg-shamrock-50">
+      <div className={cn('absolute inset-0 overflow-hidden bg-shamrock-50', className)}>
         <Carousel setApi={setApi} className="w-full h-full" opts={{ loop: true }}>
           <CarouselContent className="h-full ml-0">
             {items.map((item, index) => (
               <CarouselItem key={item.responsiveImage.src || index} className="h-full pl-0">
-                <div className="relative w-full h-full">
+                <div className={cn('relative w-full h-full', className)}>
                   <img
                     src={item.responsiveImage.src}
                     sizes={item.responsiveImage.sizes}
                     srcSet={item.responsiveImage.webpSrcSet}
                     alt={item.responsiveImage.alt || 'Matcha Tea'}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className={cn('absolute inset-0 w-full h-full object-cover', className)}
                     loading={index === 0 ? 'eager' : 'lazy'}
                     style={{
                       viewTransitionName: index === 0 ? 'hero-image' : 'none',
