@@ -1,70 +1,58 @@
 # Copilot Instructions for Ryuucafe.com
 
 ## Project Context
-Matcha e-commerce site built with **Astro 5.16** (MPA), **React 18** (islands), and **Tailwind CSS 4**. Content managed via **DatoCMS** GraphQL API. See [LLMS.md](../LLMS.md) for comprehensive details.
+- **Framework:** Astro 5.16 (MPA) + React 18 (Islands architecture)
+- **Styling:** Tailwind CSS 4 (via `@tailwindcss/vite`)
+- **Data Source:** DatoCMS (GraphQL API)
+- **Language:** TypeScript 5.5 (Strict mode)
 
-## Critical Patterns
+## Architecture & key Patterns
 
 ### Data Fetching (Build-Time Only)
-- All CMS data fetched at build time via GraphQL in `src/lib/*Fetcher.ts`
-- **Pattern:** Create typed fetcher functions that return strongly-typed data
-- **Example:** [src/lib/homeFetcher.ts](../src/lib/homeFetcher.ts) - returns `{ allProducts: Product[], pageContent: PageContent }`
-- Auth: `Bearer ${import.meta.env.DATOCMS_API_KEY}` header required
-- Always match returned data to types in [src/types.ts](../src/types.ts)
+- **Pattern:** Fetch all CMS data in `src/lib/*Fetcher.ts` functions.
+- **Rule:** Never fetch data inside `.astro` or `.tsx` components directly.
+- **Authentication:** Use `Bearer ${import.meta.env.DATOCMS_API_KEY}`.
+- **Typing:** Return types **MUST** be explicitly defined in `src/types.ts`.
+- **Example:**
+  ```typescript
+  // src/lib/homeFetcher.ts
+  export async function fetchHome(): Promise<{ allProducts: Product[]; pageContent: PageContent }> { ... }
+  ```
 
-### Component Hydration Strategy
-- **Default:** `.astro` components for all static content
-- **React `.tsx` only when:** User interaction required (modals, carousels, forms)
-- **Hydration directives:**
-  - `client:only="react"` for HeadlessUI/Radix components (required for proper initialization)
-  - `client:load` for above-fold interactive elements
-  - `client:visible` for below-fold interactions
-- **Example:** [OrderButton.tsx](../src/components/product/OrderButton.tsx) uses `client:only="react"` for HeadlessUI Dialog
+### Component Hydration (Islands)
+- **Default:** Use `.astro` components for static content (Layouts, text, images).
+- **Interactive:** Use `.tsx` (React) only when user interaction is required (Modals, Carousels).
+- **Directives:**
+  - `client:load`: For critical above-the-fold interactivity (e.g., `HeroCarousel`).
+  - `client:only="react"`: **MANDATORY** for HeadlessUI/Radix components (e.g., `OrderButton`) to avoid hydration mismatches.
+  - `client:visible`: For lower priority interactive elements.
 
-### Styling Conventions
-- **Tailwind v4:** Configuration via Vite plugin in [astro.config.mjs](../astro.config.mjs), not `tailwind.config.js`
-- **No DaisyUI:** Custom button/component utilities defined in [global.css](../src/styles/global.css) `@layer components`
-- **Custom fonts:** IBM Plex Sans Thai (body), Poppins (headings), configured via `@fontsource` imports in [Layout.astro](../src/components/Layout.astro)
-- **Colors:** Primary palette is `shamrock-*` (green theme), use existing values
-- **Utilities:** Use `cn()` from `@/utils/*` for conditional classes
-- **Breakpoints:** Standard Tailwind + custom `xs:` (475px) for extra-small devices
+### Styling (Tailwind v4)
+- **Configuration:** No `tailwind.config.js`. Config is in `src/styles/global.css` using CSS variables and `@theme`.
+- **Colors:** Primary palette uses `shamrock-*` and `malachite-*` (defined in global.css).
+- **Components:** **NO DaisyUI**. Custom button/card classes are manually defined in `global.css` `@layer components`.
+- **Utilities:** Use `cn()` from `@/utils/cn` for class merging.
+- **Fonts:** `IBM Plex Sans Thai` (body), `Poppins` (headings), `Esteban`, `Sarabun`. managed via `@fontsource/*`.
 
-### TypeScript & Imports
-- **Path aliases:** `@/components/*` and `@/utils/*` (see [tsconfig.json](../tsconfig.json))
-- **Type safety:** All CMS data types defined in [src/types.ts](../src/types.ts)
-- Never use `any` - extend types if CMS schema changes
-- Product categorization: `product.powderType === true` = Single Cultivar, `false/undefined` = Blend
+### Data Models & Logic
+- **Product Type:**
+  - `powderType: true` (or truthy) = **Single Cultivar**
+  - `powderType: false` (or undefined) = **Blend**
+- **Images:** Always use DatoCMS `responsiveImage` data with Astro's `<Image />` or `<Picture />`.
 
-### Image Handling
-- **Always** use Astro `<Image />` for optimized loading
-- CMS images: Use `responsiveImage.src`, `responsiveImage.srcSet` from DatoCMS
-- Local images: Import from `src/assets/images/` and pass to `<Image />`
-- **Example:** [index.astro](../src/pages/index.astro) lines 56-67 show CMS image with fallback
+## Critical Developer Workflows
 
-## Development Workflow
+### Build & Type Safety
+- **Command:** `npm run build` performs `astro check` + `astro build`.
+- **Rule:** Always run build locally before committing to catch type errors.
+- **Linter:** Project uses **Biome**. Run format on save (configured in VS Code).
 
-### Commands (from root)
-```sh
-npm run dev         # Dev server at localhost:4321
-npm run build       # Type check + build (runs astro check first)
-npm run preview     # Preview production build
-```
+### Files & Structure
+- **Global Types:** `src/types.ts` (Single source of truth for CMS models).
+- **Layout:** `src/components/Layout.astro` handles `<head>`, SEO, and global styles.
+- **Aliases:** Use `@/components/*` and `@/utils/*`.
 
-### Pre-Commit Requirements
-1. Run `npm run build` to ensure type safety (includes `astro check`)
-2. Biome formats on save (config: [biome.json](../biome.json))
-3. All new components must have explicit TypeScript types
-UI component libraries** - Use custom utilities in `global.css` + HeadlessUI/Radix for interactive components
-- **Image optimization mandatory** - No raw `<img>` tags, always use Astro `<Image />` or `<Picture />`
-- **Type all fetcher returns** - Update `src/types.ts` if CMS schema evolves
-- **Minimal client-side JS** - Leverage Astro's static generation
-- **Mobile-first responsive** - Test at 375px, 475px (xs), 640px (sm), and up
-- **Type all fetcher returns** - Update `src/types.ts` if CMS schema evolves
-- **Minimal client-side JS** - Leverage Astro's static generation
-
-## Key Files Reference
-- [src/pages/index.astro](../src/pages/index.astro) - Homepage pattern (data fetching, product filtering)
-- [src/lib/homeFetcher.ts](../src/lib/homeFetcher.ts) - DatoCMS GraphQL query structure
-- [src/types.ts](../src/types.ts) - All CMS content models
-- [src/components/Layout.astro](../src/components/Layout.astro) - Global layout with fonts, SEO, analytics
-- [LLMS.md](../LLMS.md) - Detailed architecture guide
+## Common Implementation Details
+- **HeadlessUI:** Wrapped in `client:only="react"` for Dialogs/Menus.
+- **Carousels:** Uses `embla-carousel-react`.
+- **Formatting:** `biome.json` manages formatting rules (indent: 2, width: 100).
