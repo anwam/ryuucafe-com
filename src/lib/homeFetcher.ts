@@ -42,7 +42,7 @@ export async function fetchHome(): Promise<{
         pageContent {
           heroSection {
             heroImage {
-              responsiveImage(imgixParams: {w: 480, h: 320}) {
+              responsiveImage(imgixParams: {w: 540, h: 540, q: 95, fm: webp, auto: compress}) {
                 sizes
                 srcSet
                 webpSrcSet
@@ -55,7 +55,7 @@ export async function fetchHome(): Promise<{
             heroTitle
             heroDescription
             heroBanner {
-              responsiveImage(imgixParams: {w: 1200, h: 600, fm: webp, q: 90}) {
+              responsiveImage(imgixParams: {w: 1920, fm: webp, q: 95, auto: compress}) {
                 sizes
                 srcSet
                 webpSrcSet
@@ -74,8 +74,6 @@ export async function fetchHome(): Promise<{
   const json = (await response.json()) as {
     data: { allProducts: Product[]; pageContent: PageContent }
   }
-
-  console.log({ heroBanner: JSON.stringify(json.data.pageContent.heroSection.heroBanner) })
 
   return {
     allProducts: json.data.allProducts,
