@@ -6,26 +6,49 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
+import { fetchHeroBanners } from '@/lib/bannerFetcher'
 import { cn } from '@/utils/cn'
 import * as React from 'react'
 import type { HeroBanner, HeroImage } from '../types'
 
 interface HeroCarouselProps {
-  banners?: HeroBanner[]
+  /** SSG banners from build-time data — shown immediately */
+  initialBanners?: HeroBanner[]
   fallbackImage: HeroImage
   className?: string
 }
 
-export function HeroCarousel({ banners, fallbackImage, className }: HeroCarouselProps) {
+function buildItems(banners: HeroBanner[] | undefined, fallbackImage: HeroImage): HeroBanner[] {
+  if (banners && banners.length > 0) {
+    return banners
+  }
+  return [{ responsiveImage: fallbackImage.responsiveImage }]
+}
+
+export function HeroCarousel({ initialBanners, fallbackImage, className }: HeroCarouselProps) {
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)
   const [count, setCount] = React.useState(0)
+  const [banners, setBanners] = React.useState<HeroBanner[] | undefined>(initialBanners)
 
-  // Prepare items
-  const items =
-    banners && banners.length > 0 ? banners : [{ responsiveImage: fallbackImage.responsiveImage }]
+  const items = buildItems(banners, fallbackImage)
 
-  // Auto-play effect
+  // Fetch the latest banners on the client to get fresh data
+  React.useEffect(() => {
+    let cancelled = false
+
+    fetchHeroBanners().then((freshBanners) => {
+      if (!cancelled && freshBanners.length > 0) {
+        setBanners(freshBanners)
+      }
+    })
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  // Auto-play & slide tracking
   React.useEffect(() => {
     if (!api) {
       return
@@ -63,7 +86,7 @@ export function HeroCarousel({ banners, fallbackImage, className }: HeroCarousel
   if (items.length === 0) return null
 
   return (
-    <div className={cn('relative w-full h-full min-h-100 lg:min-h-125', className)}>
+    <div className={cn('relative w-full h-auto min-h-100 aspect-38/9', className)}>
       <div className={cn('absolute inset-0 overflow-hidden bg-shamrock-50', className)}>
         <Carousel setApi={setApi} className="w-full h-full" opts={{ loop: true }}>
           <CarouselContent className="h-full ml-0">
@@ -81,7 +104,7 @@ export function HeroCarousel({ banners, fallbackImage, className }: HeroCarousel
                       viewTransitionName: index === 0 ? 'hero-image' : 'none',
                     }}
                   />
-                  {/* Gradient Overlay for text legibility if needed, or just mood */}
+                  {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-linear-to-t from-shamrock-900/20 to-transparent pointer-events-none" />
                 </div>
               </CarouselItem>

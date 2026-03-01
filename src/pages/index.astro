@@ -16,7 +16,20 @@ const blendMenus = products.filter((product) => !product.powderType)
 <Layout>
  <article class="relative w-full overflow-hidden">
     {/* Hero Section */}
-    <section class="relative w-full min-h-150 lg:min-h-175 py-16 lg:py-20 bg-linear-to-br from-shamrock-950 via-shamrock-900 to-black text-shamrock-50 overflow-hidden">
+    <section class="relative w-full pb-16 lg:pb-20 bg-linear-to-br from-shamrock-950 via-shamrock-900 to-black text-shamrock-50 overflow-hidden">
+
+      {/* Banner Carousel */}
+      {content.heroSection.heroBanner && (
+        <div class="pb-16 lg:pb-20">
+        <HeroCarousel
+          client:load
+          initialBanners={content.heroSection.heroBanner}
+          fallbackImage={content.heroSection.heroImage}
+          className="w-full max-w-full h-full"
+        />
+        </div>
+      )}
+
       {/* Animated background pattern */}
       <div class="absolute inset-0 opacity-10">
         <div class="absolute top-0 right-0 w-96 h-96 bg-shamrock-300 rounded-full blur-3xl animate-pulse"></div>
@@ -78,14 +91,7 @@ const blendMenus = products.filter((product) => !product.powderType)
           {/* Image Side */}
           <div class="flex-1 flex items-center justify-center h-full">
             {
-              ((content.heroSection.heroBanner?.length ?? 0) > 0) ? (
-                <HeroCarousel
-                  client:load
-                  banners={content.heroSection.heroBanner}
-                  fallbackImage={content.heroSection.heroImage}
-                  className="w-full max-w-full h-full"
-                />
-              ) : (
+              content.heroSection.heroImage && (
                 <div class="relative w-full h-full min-h-100 overflow-hidden">
                   <Image
                     src={content.heroSection.heroImage.responsiveImage.src}
