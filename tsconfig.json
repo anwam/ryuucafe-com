@@ -12,6 +12,9 @@
       "@/utils/*": [
         "src/utils/*"
       ],
+      "@/assets/*": [
+        "src/assets/*"
+      ]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
