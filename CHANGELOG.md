@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.12.0](https://github.com/anwam/ryuucafe-com/compare/v1.11.1...v1.12.0) (2026-03-01)
+
+
+### Features
+
+* Implement client-side dynamic fetching for hero banners and refactor the carousel component to support initial and fresh data. ([fca1c3b](https://github.com/anwam/ryuucafe-com/commit/fca1c3b40ebe535393f9a9783beea0921f4d08bb))
+
 ## [1.11.1](https://github.com/anwam/ryuucafe-com/compare/v1.11.0...v1.11.1) (2026-02-02)
 
 
