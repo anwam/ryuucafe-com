@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.14.0](https://github.com/anwam/ryuucafe-com/compare/v1.13.0...v1.14.0) (2026-08-09)
+
+
+### Features
+
+* update tsconfig ([c7a2078](https://github.com/anwam/ryuucafe-com/commit/c7a2078824767e5d622e688853309fed86697059))
+
 ## [1.13.0](https://github.com/anwam/ryuucafe-com/compare/v1.12.0...v1.13.0) (2026-03-01)
 
 
