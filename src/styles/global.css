@@ -59,10 +59,10 @@
 
   /* Font Family */
 
-  --font-family-poppins: "Poppins", sans-serif;
-  --font-family-ibm-plex-sans-thai: "IBM Plex Sans Thai", sans-serif;
-  --font-family-esteban: "Esteban", serif;
-  --font-family-sarabun: "Sarabun", sans-serif;
+  --font-family-poppins: var(--font-poppins);
+  --font-family-ibm-plex-sans-thai: var(--font-ibm-plex-sans-thai);
+  --font-family-esteban: var(--font-esteban);
+  --font-family-sarabun: var(--font-sarabun);
 }
 
 @layer utilities {

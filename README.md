@@ -65,7 +65,7 @@ Data fetching logic is strictly separated from UI components, organized in layer
 - **Note:** This project does not use a `tailwind.config.js` file.
 
 ### 3. Fonts
-Fonts are managed via `@fontsource` packages (IBM Plex Sans Thai, Poppins, etc.).
+Fonts are managed via Astro's Fonts API using the Fontsource provider (IBM Plex Sans Thai, Poppins, etc.), configured in `astro.config.mjs`.
 
 ## Development Workflow
 

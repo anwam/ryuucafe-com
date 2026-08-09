@@ -1,4 +1,5 @@
 ---
+import { Font } from 'astro:assets'
 import { SEO } from 'astro-seo'
 import FeatureImage from '../../assets/images/home/feature-1.webp'
 
@@ -33,4 +34,8 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="generator" content={Astro.generator} />
   <SEO title={title} description={description} openGraph={openGraph} />
+  <Font cssVariable="--font-poppins" preload />
+  <Font cssVariable="--font-ibm-plex-sans-thai" preload />
+  <Font cssVariable="--font-esteban" />
+  <Font cssVariable="--font-sarabun" />
 </head>
