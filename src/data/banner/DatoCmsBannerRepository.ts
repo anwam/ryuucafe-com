@@ -1,5 +1,5 @@
-import { postDatoCmsQuery } from '../datocms/client'
 import type { HeroBanner } from '@/domain/home/types'
+import { postDatoCmsQuery } from '../datocms/client'
 import type { BannerRepository } from './BannerRepository'
 
 const HERO_BANNER_QUERY = `{

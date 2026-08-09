@@ -1,10 +1,10 @@
 ---
+import { Image } from 'astro:assets'
+import { homeRepository } from '@/data/home/DatoCmsHomeRepository'
+import { HeroCarousel } from '@/presentation/home/HeroCarousel'
 import ProductItem from '@/presentation/home/ProductItem.astro'
 import Layout from '@/presentation/layout/Layout.astro'
-import { Image } from 'astro:assets'
 import OrderButton from '@/presentation/product/OrderButton'
-import { HeroCarousel } from '@/presentation/home/HeroCarousel'
-import { homeRepository } from '@/data/home/DatoCmsHomeRepository'
 
 const homePageData = await homeRepository.getHome()
 const products = homePageData.allProducts
