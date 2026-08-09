@@ -1,12 +1,12 @@
 ---
-import ProductItem from '../components/ProductItem.astro'
-import Layout from '@/components/Layout.astro'
+import ProductItem from '@/presentation/home/ProductItem.astro'
+import Layout from '@/presentation/layout/Layout.astro'
 import { Image } from 'astro:assets'
-import OrderButton from '@/components/product/OrderButton'
-import { HeroCarousel } from '@/components/HeroCarousel'
-import { fetchHome } from 'src/lib/homeFetcher'
+import OrderButton from '@/presentation/product/OrderButton'
+import { HeroCarousel } from '@/presentation/home/HeroCarousel'
+import { homeRepository } from '@/data/home/DatoCmsHomeRepository'
 
-const homePageData = await fetchHome()
+const homePageData = await homeRepository.getHome()
 const products = homePageData.allProducts
 const content = homePageData.pageContent
 const singleMenus = products.filter((product) => product.powderType)
