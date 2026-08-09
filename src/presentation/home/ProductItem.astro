@@ -4,14 +4,22 @@ import type { Product } from '@/domain/product/types'
 
 type Props = {
   product: Product
+  featured?: boolean
 }
-const { product } = Astro.props
+const { product, featured = false } = Astro.props
+const tasteNotes = product.tasteNote
+  ?.split(',')
+  .map((tn) => tn.trim())
+  .filter(Boolean)
 ---
 
 <div
-  class="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-shamrock-900/5"
+  class:list={[
+    'group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-shamrock-900/5',
+    featured && 'md:col-span-2 md:row-span-2',
+  ]}
 >
-  <div class="relative aspect-3/2 overflow-hidden bg-gray-50">
+  <div class:list={['relative overflow-hidden bg-gray-50', featured ? 'aspect-16/9 md:aspect-4/3' : 'aspect-3/2']}>
     <Picture
       src={product.coverImage.responsiveImage.src}
       sizes={product.coverImage.responsiveImage.sizes}
@@ -24,7 +32,7 @@ const { product } = Astro.props
       loading="eager"
       class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
     />
-    
+
     {/* Badges container */}
     <div class="absolute top-3 left-3 flex flex-col gap-2 z-10">
       {
@@ -44,47 +52,38 @@ const { product } = Astro.props
     </div>
   </div>
 
-  <div class="flex flex-1 flex-col gap-3 p-5">
-    <div>
-      <h3 class="font-poppins text-lg font-bold text-gray-900 group-hover:text-shamrock-700 transition-colors duration-300">
+  <div class:list={['flex flex-1 flex-col gap-3 p-5', featured && 'md:p-6']}>
+    <div class="flex items-baseline justify-between gap-3">
+      <h3 class:list={['font-poppins font-bold text-gray-900 group-hover:text-shamrock-700 transition-colors duration-300', featured ? 'text-xl md:text-2xl' : 'text-lg']}>
         {product.name}
       </h3>
       {
-        product.description && (
-          <p class="hidden mt-1 text-sm text-gray-500 font-sarabun line-clamp-3 leading-relaxed">
-            {product.description}
+        product.price && (
+          <p class:list={['font-esteban text-shamrock-800 shrink-0', featured ? 'text-2xl' : 'text-xl']}>
+            ฿{product.price}
           </p>
         )
       }
     </div>
 
-    <div class="mt-auto flex items-end justify-between gap-2 border-t border-gray-50 pt-3">
-      {
-        product.price && (
-          <div class="flex flex-col">
-            <span class="text-xs text-gray-400 font-medium uppercase tracking-wider">Price</span>
-            <p class="font-esteban text-xl text-shamrock-800">
-              ฿{product.price}
-            </p>
-          </div>
-        )
-      }
+    {
+      featured && product.description && (
+        <p class="text-sm text-gray-500 font-sarabun leading-relaxed line-clamp-2">
+          {product.description}
+        </p>
+      )
+    }
 
-      {
-        product.tasteNote && (
-          <div class="flex flex-wrap justify-end gap-1.5 max-w-[60%]">
-            {product.tasteNote
-              .split(",")
-              .slice(0, 2) 
-              .map((tn) => tn.trim())
-              .map((tn) => (
-                <span class="inline-flex items-center rounded bg-shamrock-50 px-1.5 py-0.5 font-poppins text-[0.6rem] font-medium text-shamrock-600 uppercase tracking-wide border border-shamrock-100">
-                  {tn}
-                </span>
-              ))}
-          </div>
-        )
-      }
-    </div>
+    {
+      tasteNotes && tasteNotes.length > 0 && (
+        <div class="mt-auto flex flex-wrap gap-1.5 border-t border-gray-50 pt-3">
+          {tasteNotes.map((tn) => (
+            <span class="inline-flex items-center rounded bg-shamrock-50 px-2 py-1 font-poppins text-xs font-medium text-shamrock-600 uppercase tracking-wide border border-shamrock-100">
+              {tn}
+            </span>
+          ))}
+        </div>
+      )
+    }
   </div>
 </div>
