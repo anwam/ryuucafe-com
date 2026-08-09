@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.15.0](https://github.com/anwam/ryuucafe-com/compare/v1.14.0...v1.15.0) (2026-08-09)
+
+
+### Features
+
+* update actions version ([0f47554](https://github.com/anwam/ryuucafe-com/commit/0f475542e968ab7b620220f8498d4aeafb16f4a6))
+
 ## [1.14.0](https://github.com/anwam/ryuucafe-com/compare/v1.13.0...v1.14.0) (2026-08-09)
 
 
