@@ -1,5 +1,5 @@
 import RobinhoodIconImg from '@/assets/images/robinhood.png'
-import { cn } from '@/utils/cn'
+import { cn } from '@/shared/utils/cn'
 import { Button, Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react'
 import { ExternalLink } from 'lucide-react'
 import { Fragment, useState } from 'react'

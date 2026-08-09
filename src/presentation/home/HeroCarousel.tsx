@@ -5,11 +5,11 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/ui/carousel'
-import { fetchHeroBanners } from '@/lib/bannerFetcher'
-import { cn } from '@/utils/cn'
+} from '@/shared/ui/carousel'
+import { bannerRepository } from '@/data/banner/DatoCmsBannerRepository'
+import { cn } from '@/shared/utils/cn'
 import * as React from 'react'
-import type { HeroBanner, HeroImage } from '../types'
+import type { HeroBanner, HeroImage } from '@/domain/home/types'
 
 interface HeroCarouselProps {
   /** SSG banners from build-time data — shown immediately */
@@ -37,7 +37,7 @@ export function HeroCarousel({ initialBanners, fallbackImage, className }: HeroC
   React.useEffect(() => {
     let cancelled = false
 
-    fetchHeroBanners().then((freshBanners) => {
+    bannerRepository.getHeroBanners().then((freshBanners) => {
       if (!cancelled && freshBanners.length > 0) {
         setBanners(freshBanners)
       }
