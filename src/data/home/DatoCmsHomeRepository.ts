@@ -1,5 +1,6 @@
 import { postDatoCmsQuery } from '../datocms/client'
 import type { HomeData, HomeRepository } from './HomeRepository'
+import { mockHomeData } from './mockHomeData'
 
 const HOME_QUERY = `
 {
@@ -61,7 +62,12 @@ const HOME_QUERY = `
 
 class DatoCmsHomeRepository implements HomeRepository {
   async getHome(): Promise<HomeData> {
-    const response = await postDatoCmsQuery(HOME_QUERY, import.meta.env.DATOCMS_API_KEY)
+    const apiKey = import.meta.env.DATOCMS_API_KEY
+    if (!apiKey) {
+      return mockHomeData
+    }
+
+    const response = await postDatoCmsQuery(HOME_QUERY, apiKey)
     const json = (await response.json()) as { data: HomeData }
     return json.data
   }

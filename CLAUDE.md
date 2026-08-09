@@ -13,7 +13,7 @@ Ryuucafe.com — storefront site for Ryuu, a matcha cafe in Thailand. Astro 5 MP
 - `npm run preview` — preview production build
 - No test suite in this repo.
 - Formatting/linting: Biome (`biome.json` — 2-space indent, single quotes, no semicolons, width 100). Format on save.
-- Env: copy `sample.env` to `.env`; requires `DATOCMS_API_KEY` (read-only DatoCMS token).
+- Env: copy `sample.env` to `.env`; requires `DATOCMS_API_KEY` (read-only DatoCMS token). If unset, `dev`/`build` fall back to mock data (see below) instead of failing.
 - Node version pinned via `mise.toml` (node 24).
 
 ## Architecture
@@ -31,7 +31,10 @@ Ryuucafe.com — storefront site for Ryuu, a matcha cafe in Thailand. Astro 5 MP
   `data/home/DatoCmsHomeRepository.ts`). All CMS calls go through
   `data/datocms/client.ts`. Never fetch data inside `.astro`/`.tsx` components
   directly — call a repository from `src/pages/*.astro` and pass results down
-  as props.
+  as props. When `DATOCMS_API_KEY` is unset, `DatoCmsHomeRepository.getHome()`
+  returns `data/home/mockHomeData.ts` instead of calling the API — lets
+  `dev`/`build` run with no key. Update the mock alongside `domain/*` types
+  when the CMS schema changes.
 - `src/presentation/` — `.astro` and `.tsx` components, grouped by feature
   (`layout/`, `home/`, `product/`, `seo/`, `analytics/`). Imports `domain`
   types only; never imports `data/*` directly, with one documented exception
