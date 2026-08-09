@@ -1,13 +1,22 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "@/domain/*": ["src/domain/*"],
-      "@/data/*": ["src/data/*"],
-      "@/presentation/*": ["src/presentation/*"],
-      "@/shared/*": ["src/shared/*"],
-      "@/assets/*": ["src/assets/*"]
+      "@/domain/*": [
+        "./src/domain/*"
+      ],
+      "@/data/*": [
+        "./src/data/*"
+      ],
+      "@/presentation/*": [
+        "./src/presentation/*"
+      ],
+      "@/shared/*": [
+        "./src/shared/*"
+      ],
+      "@/assets/*": [
+        "./src/assets/*"
+      ]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
