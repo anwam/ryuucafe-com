@@ -6,6 +6,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/shared/ui/carousel'
+// Intentional exception to "presentation never imports data": this is a client-side
+// runtime refetch after hydration, not a build-time fetch. See CLAUDE.md.
 import { bannerRepository } from '@/data/banner/DatoCmsBannerRepository'
 import { cn } from '@/shared/utils/cn'
 import * as React from 'react'
