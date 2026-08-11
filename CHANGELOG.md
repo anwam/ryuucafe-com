@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.16.0](https://github.com/anwam/ryuucafe-com/compare/v1.15.0...v1.16.0) (2026-08-09)
+
+
+### Features
+
+* overhaul ui ([5d9046b](https://github.com/anwam/ryuucafe-com/commit/5d9046b114acecc3384f20d4f3529446a366b196))
+* overhaul ui ([4f3b6a7](https://github.com/anwam/ryuucafe-com/commit/4f3b6a7da06054fd9ac32028eedb24f631013c84))
+* provide mocked data ([289e716](https://github.com/anwam/ryuucafe-com/commit/289e71661f0868a82db5d392c80e2f1a0650be82))
+* provide mocked data ([c0014b7](https://github.com/anwam/ryuucafe-com/commit/c0014b7f195465cbcf81ceeb5ee03e790d72762c))
+
 ## [1.15.0](https://github.com/anwam/ryuucafe-com/compare/v1.14.0...v1.15.0) (2026-08-09)
 
 
