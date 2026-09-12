@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.18.0](https://github.com/anwam/ryuucafe-com/compare/v1.17.1...v1.18.0) (2026-09-12)
+
+
+### Features
+
+* add new dependencies for data visualization and animations ([8041fc3](https://github.com/anwam/ryuucafe-com/commit/8041fc335a59970ac3743721e985cff35fd13655))
+* add new dependencies for data visualization and animations ([6585450](https://github.com/anwam/ryuucafe-com/commit/6585450922c8d5727f6c3211997f46509362c507))
+
 ## [1.17.1](https://github.com/anwam/ryuucafe-com/compare/v1.17.0...v1.17.1) (2026-09-12)
 
 
