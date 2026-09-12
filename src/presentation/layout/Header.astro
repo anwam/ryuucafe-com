@@ -1,0 +1,36 @@
+---
+import { Picture } from 'astro:assets'
+import RyuuLogo from '../../assets/images/main-logo.webp'
+import HeaderMenus from './HeaderMenus'
+---
+
+<header class="sticky top-0 z-header h-20 w-full bg-white/90 backdrop-blur-md border-b border-shamrock-100 transition-all duration-300">
+  <nav class="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center gap-x-3 group cursor-pointer" onclick="window.scrollTo(0,0)">
+      <Picture
+        class="hidden aspect-square rounded-full md:block transition-transform duration-500 group-hover:rotate-12"
+        width={48}
+        height={48}
+        src={RyuuLogo}
+        densities={[1, 2]}
+        alt="RYUU Matcha Logo"
+      />
+      <div class="flex flex-col">
+        <h1 class="text-2xl font-bold tracking-tight text-shamrock-900 font-poppins">
+          RYUU
+        </h1>
+        <span class="text-xs font-medium text-shamrock-500 -mt-1 tracking-widest">りゅう</span>
+      </div>
+    </div>
+
+    {/* Mobile Menu Trigger & Content handled by React component */}
+    <div class="lg:hidden">
+      <HeaderMenus vairiant="mobile" client:load />
+    </div>
+
+    {/* Desktop Menu */}
+    <div class="hidden lg:block">
+      <HeaderMenus vairiant="desktop" client:load />
+    </div>
+  </nav>
+</header>

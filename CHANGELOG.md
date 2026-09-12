@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.15.0](https://github.com/anwam/ryuucafe-com/compare/v1.14.0...v1.15.0) (2026-08-09)
+
+
+### Features
+
+* update actions version ([0f47554](https://github.com/anwam/ryuucafe-com/commit/0f475542e968ab7b620220f8498d4aeafb16f4a6))
+
+## [1.14.0](https://github.com/anwam/ryuucafe-com/compare/v1.13.0...v1.14.0) (2026-08-09)
+
+
+### Features
+
+* update tsconfig ([c7a2078](https://github.com/anwam/ryuucafe-com/commit/c7a2078824767e5d622e688853309fed86697059))
+
+## [1.13.0](https://github.com/anwam/ryuucafe-com/compare/v1.12.0...v1.13.0) (2026-03-01)
+
+
+### Features
+
+* Implement order button with a modal for selecting delivery plat… ([01c3777](https://github.com/anwam/ryuucafe-com/commit/01c37772ec61cb8f0858bd337bf7d4d68ccad2ce))
+* Implement order button with a modal for selecting delivery platforms, featuring custom icons and a new Robinhood image asset. ([dc3e32a](https://github.com/anwam/ryuucafe-com/commit/dc3e32a96fcb192f8ecbf9556448b628b324d1e3))
+
+## [1.12.0](https://github.com/anwam/ryuucafe-com/compare/v1.11.1...v1.12.0) (2026-03-01)
+
+
+### Features
+
+* Implement client-side dynamic fetching for hero banners and refactor the carousel component to support initial and fresh data. ([fca1c3b](https://github.com/anwam/ryuucafe-com/commit/fca1c3b40ebe535393f9a9783beea0921f4d08bb))
+
 ## [1.11.1](https://github.com/anwam/ryuucafe-com/compare/v1.11.0...v1.11.1) (2026-02-02)
 
 

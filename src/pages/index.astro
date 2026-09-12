@@ -1,22 +1,29 @@
 ---
-import ProductItem from '../components/ProductItem.astro'
-import Layout from '@/components/Layout.astro'
 import { Image } from 'astro:assets'
-import OrderButton from '@/components/product/OrderButton'
-import { HeroCarousel } from '@/components/HeroCarousel'
-import { fetchHome } from 'src/lib/homeFetcher'
+import { homeRepository } from '@/data/home/DatoCmsHomeRepository'
+import { HeroCarousel } from '@/presentation/home/HeroCarousel'
+import ProductItem from '@/presentation/home/ProductItem.astro'
+import Layout from '@/presentation/layout/Layout.astro'
+import MobileOrderBar from '@/presentation/product/MobileOrderBar'
+import OrderButton from '@/presentation/product/OrderButton'
 
-const homePageData = await fetchHome()
+const homePageData = await homeRepository.getHome()
 const products = homePageData.allProducts
 const content = homePageData.pageContent
 const singleMenus = products.filter((product) => product.powderType)
 const blendMenus = products.filter((product) => !product.powderType)
+
+const featuredId = (list: typeof products) =>
+  list.find((p) => p.bestSeller)?.id ?? list.find((p) => p.recommended)?.id
+
+const singleFeaturedId = featuredId(singleMenus)
+const blendFeaturedId = featuredId(blendMenus)
 ---
 
 <Layout>
  <article class="relative w-full overflow-hidden">
     {/* Hero Section */}
-    <section class="relative w-full pb-16 lg:pb-20 bg-linear-to-br from-shamrock-950 via-shamrock-900 to-black text-shamrock-50 overflow-hidden">
+    <section id="hero" class="relative w-full pb-16 lg:pb-20 bg-linear-to-br from-shamrock-950 via-shamrock-900 to-black text-shamrock-50 overflow-hidden">
 
       {/* Banner Carousel */}
       {content.heroSection.heroBanner && (
@@ -37,7 +44,7 @@ const blendMenus = products.filter((product) => !product.powderType)
       </div>
       
       <div class="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full">
-        <div class="flex flex-col-reverse gap-10 lg:flex-row lg:items-center lg:gap-16 min-h-125 lg:min-h-150">
+        <div class="flex flex-col-reverse gap-10 lg:flex-row lg:items-center lg:gap-16 sm:min-h-125 lg:min-h-150">
           {/* Content Side */}
           <div class="flex flex-1 flex-col items-start justify-center gap-y-8">
             {/* Badge */}
@@ -62,7 +69,7 @@ const blendMenus = products.filter((product) => !product.powderType)
             </div>
 
             {/* Description */}
-            <p class="font-ibm-plex-sans-thai text-lg sm:text-xl lg:text-2xl leading-relaxed text-shamrock-100/95 max-w-2xl text-balance whitespace-pre-line">
+            <p class="font-sarabun text-lg sm:text-xl lg:text-2xl leading-relaxed text-shamrock-100/95 max-w-2xl text-balance whitespace-pre-line">
               {content.heroSection.heroDescription ||
                 `5 คาแรคเตอร์มัทฉะที่คุณต้องลอง\nUji Hikari • Saemidori • Yabukita • Tsuyuhikari • Okumidori\nปรุงสดใหม่แก้วต่อแก้วเพื่อรสชาติที่ดีที่สุด`}
             </p>
@@ -126,17 +133,22 @@ const blendMenus = products.filter((product) => !product.powderType)
 
       <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
         <div class="mb-12 lg:mb-16 text-center">
-            <span class="text-shamrock-600 font-medium tracking-widest text-sm uppercase">Authentic Taste</span>
-            <h2 class="mt-2 text-3xl font-bold text-gray-900 lg:text-4xl font-esteban">
+            <div class="inline-flex items-center gap-2">
+              <span class="h-px w-8 bg-shamrock-400"></span>
+              <span class="text-shamrock-600 font-medium text-sm">Authentic Taste</span>
+              <span class="h-px w-8 bg-shamrock-400"></span>
+            </div>
+            <h2 class="mt-3 text-3xl font-bold text-gray-900 lg:text-4xl font-esteban">
                 Single Cultivar Matcha
             </h2>
-            <div class="mt-4 mx-auto w-16 h-1 bg-shamrock-400 rounded-full"></div>
             <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto font-sarabun">
                 สัมผัสรสชาติอันเป็นเอกลักษณ์ของมัทฉะสายพันธุ์เดี่ยว ที่ผ่านการคัดสรรอย่างพิถีพิถันจากแหล่งเพาะปลูกชั้นยอด
             </p>
         </div>
-        <div class="grid grid-cols-1 gap-6 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {singleMenus.map((product) => <ProductItem product={product} />)}
+        <div class="grid grid-cols-1 gap-6 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:auto-rows-[1fr]">
+            {singleMenus.map((product) => (
+              <ProductItem product={product} featured={product.id === singleFeaturedId} />
+            ))}
         </div>
       </div>
     </section>
@@ -145,19 +157,25 @@ const blendMenus = products.filter((product) => !product.powderType)
     <section class="py-12 lg:py-24 bg-white relative z-10">
       <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mb-12 lg:mb-16 text-center">
-            <span class="text-shamrock-600 font-medium tracking-widest text-sm uppercase">Perfect Harmony</span>
-            <h2 class="mt-2 text-3xl font-bold text-gray-900 lg:text-4xl font-esteban">
+            <div class="inline-flex items-center gap-2">
+              <span class="h-px w-8 bg-shamrock-400"></span>
+              <span class="text-shamrock-600 font-medium text-sm">Perfect Harmony</span>
+              <span class="h-px w-8 bg-shamrock-400"></span>
+            </div>
+            <h2 class="mt-3 text-3xl font-bold text-gray-900 lg:text-4xl font-esteban">
                 House Blends
             </h2>
-            <div class="mt-4 mx-auto w-16 h-1 bg-shamrock-400 rounded-full"></div>
             <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto font-sarabun">
                 การผสมผสานมัทฉะหลากหลายสายพันธุ์อย่างลงตัว เพื่อให้ได้รสชาติและกลิ่นสัมผัสที่ซับซ้อนและน่าจดจำ
             </p>
         </div>
-        <ul class="grid grid-cols-1 gap-6 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {blendMenus.map((product) => <ProductItem product={product} />)}
+        <ul class="grid grid-cols-1 gap-6 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:auto-rows-[1fr]">
+            {blendMenus.map((product) => (
+              <ProductItem product={product} featured={product.id === blendFeaturedId} />
+            ))}
         </ul>
       </div>
     </section>
   </article>
+  <MobileOrderBar revealAfterId="hero" client:load />
 </Layout>

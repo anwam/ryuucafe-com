@@ -55,17 +55,17 @@ This command runs `astro check` to verify types before building the static asset
 ## Project Architecture & Patterns
 
 ### 1. Data Fetching
-Data fetching logic is strictly separated from UI components.
-- **Location:** `src/lib/*Fetcher.ts`
-- **Pattern:** functions return typed data structures matching CMS models.
-- **Rule:** Do not fetch data directly inside `.astro` or `.tsx` components.
+Data fetching logic is strictly separated from UI components, organized in layers:
+- **Types:** `src/domain/*/types.ts` — CMS model shapes.
+- **Fetching:** `src/data/*/DatoCms*Repository.ts` — repository interfaces + DatoCMS implementations.
+- **Rule:** Do not fetch data directly inside `.astro` or `.tsx` components; call a repository from `src/pages/*.astro` and pass results down as props. See `CLAUDE.md` for the full layer rules.
 
 ### 2. Styling (Tailwind v4)
 - **Config:** CSS variables and theme configuration are located in `src/styles/global.css`.
 - **Note:** This project does not use a `tailwind.config.js` file.
 
 ### 3. Fonts
-Fonts are managed via `@fontsource` packages (IBM Plex Sans Thai, Poppins, etc.).
+Fonts are managed via Astro's Fonts API using the Fontsource provider (IBM Plex Sans Thai, Poppins, etc.), configured in `astro.config.mjs`.
 
 ## Development Workflow
 
