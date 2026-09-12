@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.17.0](https://github.com/anwam/ryuucafe-com/compare/v1.16.0...v1.17.0) (2026-09-12)
+
+
+### Features
+
+* add new branch data and storefront showcase ([aa1707a](https://github.com/anwam/ryuucafe-com/commit/aa1707afd1d2fc5b315b95ba58fb4ba904ffb1ad))
+
 ## [1.16.0](https://github.com/anwam/ryuucafe-com/compare/v1.15.0...v1.16.0) (2026-08-09)
 
 
