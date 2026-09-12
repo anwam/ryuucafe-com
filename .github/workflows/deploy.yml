@@ -1,0 +1,62 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        env:
+          DATOCMS_API_KEY: ${{ secrets.DATOCMS_API_KEY }}
+          PUBLIC_DATOCMS_API_KEY: ${{ secrets.PUBLIC_DATOCMS_API_KEY || secrets.DATOCMS_API_KEY }}
+          PUBLIC_GA_DISABLED: ${{ vars.PUBLIC_GA_DISABLED || vars.VITE_GA_DISABLED }}
+        run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ./dist --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME || 'ryuucafe-com' }} --branch=${{ github.head_ref || github.ref_name }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Output deployment summary
+        run: |
+          echo "### 🚀 Cloudflare Pages Deployment" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status:** Success" >> $GITHUB_STEP_SUMMARY
+          echo "- **Environment:** \`${{ steps.deploy.outputs.pages-environment || 'pages' }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Deployment URL:** [${{ steps.deploy.outputs.deployment-url }}](${{ steps.deploy.outputs.deployment-url }})" >> $GITHUB_STEP_SUMMARY
+          if [ -n "${{ steps.deploy.outputs.pages-deployment-alias-url }}" ]; then
+            echo "- **Branch Alias URL:** [${{ steps.deploy.outputs.pages-deployment-alias-url }}](${{ steps.deploy.outputs.pages-deployment-alias-url }})" >> $GITHUB_STEP_SUMMARY
+          fi
