@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.17.1](https://github.com/anwam/ryuucafe-com/compare/v1.17.0...v1.17.1) (2026-09-12)
+
+
+### Bug Fixes
+
+* type errors ([9f0ffab](https://github.com/anwam/ryuucafe-com/commit/9f0ffabe23b6a41c25d92a5b452dad107bc77633))
+* type errors ([866a693](https://github.com/anwam/ryuucafe-com/commit/866a693fd4f6616320ca31c33310f8707f8ab8e5))
+
 ## [1.17.0](https://github.com/anwam/ryuucafe-com/compare/v1.16.0...v1.17.0) (2026-09-12)
 
 
