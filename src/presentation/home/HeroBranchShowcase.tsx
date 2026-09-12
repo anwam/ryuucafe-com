@@ -327,10 +327,7 @@ export default function HeroBranchShowcase({
               {/* Action Buttons for this Branch */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                 {activeBranch.deliveryAvailable ? (
-                  <OrderButton
-                    defaultBranchId={activeBranch.id}
-                    className="w-full bg-shamrock-300 hover:bg-shamrock-200 text-shamrock-950 font-bold py-2.5 rounded-xl text-sm transition-all duration-300 shadow-md shadow-shamrock-900/30 flex items-center justify-center gap-1.5"
-                  >
+                  <OrderButton className="w-full bg-shamrock-300 hover:bg-shamrock-200 text-shamrock-950 font-bold py-2.5 rounded-xl text-sm transition-all duration-300 shadow-md shadow-shamrock-900/30 flex items-center justify-center gap-1.5">
                     <Utensils className="h-4 w-4" />
                     สั่งเดลิเวอรี ({activeBranch.name})
                   </OrderButton>
