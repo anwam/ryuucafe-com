@@ -1,12 +1,14 @@
 import RobinhoodIconImg from '@/assets/images/robinhood.png'
+import { branches } from '@/data/branch/branches'
 import { cn } from '@/shared/utils/cn'
 import { Button, Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react'
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, MapPin, Sparkles } from 'lucide-react'
 import { Fragment, useState } from 'react'
 
 type Props = {
   className?: string
   children?: React.ReactNode
+  defaultBranchId?: string
 }
 
 type Platform = {
@@ -115,7 +117,7 @@ const ShopeeIcon = () => (
   </svg>
 )
 
-const platforms: Platform[] = [
+const bkkPlatforms: Platform[] = [
   {
     name: 'Line Man',
     href: 'https://www.wongnai.com/delivery/businesses/2731010Vj/order',
@@ -142,14 +144,20 @@ const platforms: Platform[] = [
   },
 ]
 
-export default function OrderButton({ className, children }: Props) {
+export default function OrderButton({ className, children, defaultBranchId = 'bkk' }: Props) {
   const [isOpen, setIsOpen] = useState(false)
+  const [selectedBranchId, setSelectedBranchId] = useState(defaultBranchId)
+
+  const selectedBranch = branches.find((b) => b.id === selectedBranchId) || branches[0]
 
   return (
     <>
       <Button
         accessKey="Order"
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          setSelectedBranchId(defaultBranchId)
+          setIsOpen(true)
+        }}
         className={cn('btn btn-primary', className)}
       >
         {children || 'สั่งซื้อ'}
@@ -167,7 +175,7 @@ export default function OrderButton({ className, children }: Props) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" aria-hidden="true" />
+            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" aria-hidden="true" />
           </TransitionChild>
 
           {/* Panel wrapper */}
@@ -183,16 +191,16 @@ export default function OrderButton({ className, children }: Props) {
             >
               <DialogPanel className="w-full overflow-hidden rounded-t-3xl bg-gray-50 shadow-2xl ring-1 ring-black/5 sm:max-w-md sm:rounded-3xl">
                 {/* Gradient header */}
-                <div className="relative overflow-hidden bg-linear-to-br from-malachite-500 via-malachite-600 to-shamrock-700 px-6 pb-10 pt-6">
+                <div className="relative overflow-hidden bg-linear-to-br from-shamrock-950 via-shamrock-900 to-shamrock-800 px-6 pb-6 pt-6 text-white">
                   {/* Decorative blobs */}
-                  <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
-                  <div className="pointer-events-none absolute -left-8 bottom-0 h-28 w-28 rounded-full bg-malachite-300/20 blur-xl" />
+                  <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-shamrock-400/20 blur-2xl" />
+                  <div className="pointer-events-none absolute -left-8 bottom-0 h-28 w-28 rounded-full bg-malachite-400/20 blur-xl" />
 
                   {/* Close button */}
                   <button
                     type="button"
                     onClick={() => setIsOpen(false)}
-                    className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-all duration-150 hover:bg-white/35 focus:outline-none focus:ring-2 focus:ring-white/50"
+                    className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all duration-150 hover:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white/50 cursor-pointer"
                     aria-label="ปิด"
                   >
                     <XIcon />
@@ -200,62 +208,109 @@ export default function OrderButton({ className, children }: Props) {
 
                   {/* Header content */}
                   <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/20 text-white shadow-inner backdrop-blur-sm">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-shamrock-200 shadow-inner backdrop-blur-sm border border-white/10">
                       <DeliveryIcon />
                     </div>
                     <div>
-                      <p className="font-ibm-plex-sans-thai text-xs font-medium uppercase tracking-widest text-malachite-100/80">
-                        เลือกช่องทางสั่งซื้อ
+                      <p className="font-ibm-plex-sans-thai text-xs font-semibold tracking-wider text-shamrock-300">
+                        ORDER ONLINE • RYUU
                       </p>
-                      <h2 className="font-poppins text-xl font-bold text-white">Delivery App</h2>
+                      <h2 className="font-poppins text-xl font-bold text-white">เลือกช่องทางสั่งซื้อ</h2>
                     </div>
                   </div>
 
-                  <p className="mt-3 font-ibm-plex-sans-thai text-sm text-white/80">
-                    สามารถสั่งซื้อได้ทุก Delivery แพลตฟอร์ม
-                  </p>
-                </div>
-
-                {/* Platform list — overlaps header */}
-                <div className="rounded-t-3xl bg-gray-50 px-5 pb-6 pt-5">
-                  <ul className="flex flex-col gap-3">
-                    {platforms.map((platform) => (
-                      <li key={platform.name}>
-                        <a
-                          href={platform.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                  {/* Branch tabs */}
+                  <div className="mt-4 flex rounded-xl bg-black/40 p-1 border border-white/10">
+                    {branches.map((b) => {
+                      const isActive = b.id === selectedBranchId
+                      return (
+                        <button
+                          key={b.id}
+                          type="button"
+                          onClick={() => setSelectedBranchId(b.id)}
                           className={cn(
-                            'group flex w-full items-center gap-4 rounded-2xl px-4 py-3',
-                            'bg-white shadow-sm ring-1 ring-black/5 transition-all duration-200',
-                            'hover:-translate-y-0.5 hover:shadow-md hover:bg-gray-50 hover:ring-black/10 text-gray-900',
+                            'flex-1 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg text-xs font-medium transition-all duration-200 cursor-pointer',
+                            isActive
+                              ? 'bg-shamrock-600 text-white shadow-sm'
+                              : 'text-shamrock-200/70 hover:text-white hover:bg-white/5',
                           )}
                         >
-                          {/* App Icon */}
-                          {platform.icon}
-
-                          {/* Labels */}
-                          <div className="flex flex-col min-w-0">
-                            <span className="font-poppins text-[15px] font-semibold leading-tight text-gray-900">
-                              {platform.name}
+                          <MapPin className="h-3 w-3" />
+                          <span>{b.name}</span>
+                          {b.status === 'coming_soon' && (
+                            <span className="text-[10px] bg-amber-400/30 text-amber-200 px-1 rounded">
+                              Soon
                             </span>
-                            <span className="font-ibm-plex-sans-thai text-xs text-gray-500 mt-0.5">
-                              {platform.label}
-                            </span>
-                          </div>
+                          )}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
 
-                          {/* Arrow */}
-                          <span className="ml-auto shrink-0 text-gray-400 transition-colors duration-200 group-hover:text-blue-500">
-                            <ExternalLink className="h-[18px] w-[18px]" strokeWidth={2.5} />
-                          </span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                {/* Platform list / Branch info */}
+                <div className="rounded-t-3xl bg-gray-50 px-5 pb-6 pt-5">
+                  {selectedBranch.deliveryAvailable ? (
+                    <>
+                      <div className="mb-3 flex items-center justify-between text-xs text-gray-500 font-sarabun px-1">
+                        <span>{selectedBranch.nameTh}</span>
+                        <span className="text-shamrock-700 font-medium font-poppins">Open Now</span>
+                      </div>
+                      <ul className="flex flex-col gap-2.5">
+                        {bkkPlatforms.map((platform) => (
+                          <li key={platform.name}>
+                            <a
+                              href={platform.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={cn(
+                                'group flex w-full items-center gap-4 rounded-2xl px-4 py-3',
+                                'bg-white shadow-xs ring-1 ring-black/5 transition-all duration-200',
+                                'hover:-translate-y-0.5 hover:shadow-md hover:bg-gray-50 hover:ring-black/10 text-gray-900',
+                              )}
+                            >
+                              {/* App Icon */}
+                              {platform.icon}
 
-                  <p className="mt-5 text-center font-ibm-plex-sans-thai text-xs text-gray-400">
-                    กดเลือกแอปเพื่อไปยังหน้าสั่งซื้อ
-                  </p>
+                              {/* Labels */}
+                              <div className="flex flex-col min-w-0">
+                                <span className="font-poppins text-[15px] font-semibold leading-tight text-gray-900">
+                                  {platform.name}
+                                </span>
+                                <span className="font-ibm-plex-sans-thai text-xs text-gray-500 mt-0.5">
+                                  {platform.label}
+                                </span>
+                              </div>
+
+                              {/* Arrow */}
+                              <span className="ml-auto shrink-0 text-gray-400 transition-colors duration-200 group-hover:text-shamrock-600">
+                                <ExternalLink className="h-[18px] w-[18px]" strokeWidth={2.5} />
+                              </span>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="mt-4 text-center font-ibm-plex-sans-thai text-xs text-gray-400">
+                        กดเลือกแอปพลิเคชันเพื่อเข้าสู่หน้าเมนูสั่งซื้อ
+                      </p>
+                    </>
+                  ) : (
+                    <div className="text-center py-6 px-4 bg-white rounded-2xl border border-shamrock-100 shadow-xs">
+                      <div className="inline-flex p-3 rounded-full bg-amber-50 text-amber-600 mb-3">
+                        <Sparkles className="h-6 w-6" />
+                      </div>
+                      <h3 className="font-poppins font-bold text-gray-900 text-base">
+                        {selectedBranch.nameTh}
+                      </h3>
+                      <p className="mt-2 text-sm text-gray-600 font-sarabun leading-relaxed">
+                        บริการเดลิเวอรีสำหรับสาขาโคราช จะเปิดให้บริการพร้อมกับการเปิดตัวสาขาอย่างเป็นทางการ เร็วๆ
+                        นี้
+                      </p>
+                      <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-shamrock-50 text-shamrock-800 text-xs font-medium font-sarabun border border-shamrock-200">
+                        <span>✨ ติดตามวันเปิดตัวได้ทาง Instagram @ryuu.bkk</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </DialogPanel>
             </TransitionChild>

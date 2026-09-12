@@ -1,123 +1,118 @@
 ---
-import { Image } from 'astro:assets'
+import blendImage from '@/assets/images/home/blend.jpg'
 import { homeRepository } from '@/data/home/DatoCmsHomeRepository'
-import { HeroCarousel } from '@/presentation/home/HeroCarousel'
+import HeroBranchShowcase from '@/presentation/home/HeroBranchShowcase'
+import JapanCultivarMap from '@/presentation/home/JapanCultivarMap'
 import ProductItem from '@/presentation/home/ProductItem.astro'
 import Layout from '@/presentation/layout/Layout.astro'
 import MobileOrderBar from '@/presentation/product/MobileOrderBar'
 import OrderButton from '@/presentation/product/OrderButton'
 
 const homePageData = await homeRepository.getHome()
-const products = homePageData.allProducts
-const content = homePageData.pageContent
-const singleMenus = products.filter((product) => product.powderType)
-const blendMenus = products.filter((product) => !product.powderType)
+const cultivars = homePageData.allCultivars
+const blends = homePageData.allBlends
+const fusions = homePageData.allFusions
 
-const featuredId = (list: typeof products) =>
-  list.find((p) => p.bestSeller)?.id ?? list.find((p) => p.recommended)?.id
-
-const singleFeaturedId = featuredId(singleMenus)
-const blendFeaturedId = featuredId(blendMenus)
+const fusionFeaturedId =
+  fusions.filter((p) => p.price != null).find((p) => p.bestSeller)?.id ??
+  fusions.filter((p) => p.price != null).find((p) => p.recommended)?.id
 ---
 
 <Layout>
  <article class="relative w-full overflow-hidden">
     {/* Hero Section */}
-    <section id="hero" class="relative w-full pb-16 lg:pb-20 bg-linear-to-br from-shamrock-950 via-shamrock-900 to-black text-shamrock-50 overflow-hidden">
+    <section id="hero" class="relative w-full pt-6 pb-20 lg:pt-10 lg:pb-28 bg-linear-to-b from-shamrock-950 via-shamrock-900 to-black text-shamrock-50 overflow-hidden">
 
-      {/* Banner Carousel */}
-      {content.heroSection.heroBanner && (
-        <div class="pb-16 lg:pb-20">
-        <HeroCarousel
-          client:load
-          initialBanners={content.heroSection.heroBanner}
-          fallbackImage={content.heroSection.heroImage}
-          className="w-full max-w-full h-full"
-        />
-        </div>
-      )}
-
-      {/* Animated background pattern */}
-      <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-shamrock-300 rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-malachite-400 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+      {/* Decorative ambient background glows */}
+      <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-10 right-1/4 w-96 h-96 bg-shamrock-400/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-10 left-10 w-96 h-96 bg-malachite-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1.5s;"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(var(--color-shamrock-500)_1px,transparent_1px)] [background-size:32px_32px] opacity-15"></div>
       </div>
       
-      <div class="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full">
-        <div class="flex flex-col-reverse gap-10 lg:flex-row lg:items-center lg:gap-16 sm:min-h-125 lg:min-h-150">
-          {/* Content Side */}
-          <div class="flex flex-1 flex-col items-start justify-center gap-y-8">
-            {/* Badge */}
-            <div class="inline-flex items-center gap-2 rounded-full bg-shamrock-800/50 backdrop-blur-sm px-4 py-2 text-sm font-medium border border-shamrock-400/30">
-              <svg class="h-4 w-4 text-shamrock-300" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-              <span class="text-shamrock-100">Ceremonial Grade</span>
+      <div class="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center min-h-130 lg:min-h-155">
+          
+          {/* Left Content Side */}
+          <div class="lg:col-span-6 flex flex-col items-start justify-center gap-y-6">
+            
+            {/* Top Announcement Pill */}
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 text-xs text-shamrock-200 transition-all duration-300 shadow-sm">
+              <span class="flex h-2 w-2 rounded-full bg-amber-400 animate-ping"></span>
+              <span class="font-semibold text-amber-300 font-poppins tracking-wider uppercase text-[11px]">New Branch</span>
+              <span class="text-white/40">•</span>
+              <span class="font-sarabun text-shamrock-100">เตรียมพบกับสาขาใหม่ "โคราช" เร็วๆ นี้</span>
             </div>
 
-            {/* Main Heading */}
-            <div class="space-y-4">
-              <h1 class="font-poppins text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight text-balance">
-                {content.heroSection.heroTitle || (
-                  <>
-                    <span class="block">Small Space,</span>
-                    <span class="block text-shamrock-200">Great Matcha.</span>
-                  </>
-                )}
+            {/* Main Brand Heading */}
+            <div class="space-y-3">
+              <div class="flex items-center gap-2 text-shamrock-400 font-poppins text-xs font-semibold tracking-widest uppercase">
+                <span>Authentic Japanese Matcha Bar</span>
+                <span class="text-shamrock-600">|</span>
+                <span class="font-sarabun text-shamrock-300">りゅう</span>
+              </div>
+              <h1 class="font-poppins text-4xl sm:text-5xl lg:text-[54px] font-extrabold leading-[1.08] tracking-tight text-balance text-white">
+                <span>Your neighborhood</span>
+                <span class="block text-transparent bg-clip-text bg-linear-to-r from-shamrock-200 via-malachite-200 to-shamrock-300">
+                  authentic matcha.
+                </span>
               </h1>
-              <div class="h-1.5 w-24 rounded-full bg-linear-to-r from-shamrock-300 to-malachite-300"></div>
+              <div class="h-1.5 w-24 rounded-full bg-linear-to-r from-shamrock-300 via-malachite-400 to-shamrock-500"></div>
             </div>
 
-            {/* Description */}
-            <p class="font-sarabun text-lg sm:text-xl lg:text-2xl leading-relaxed text-shamrock-100/95 max-w-2xl text-balance whitespace-pre-line">
-              {content.heroSection.heroDescription ||
-                `5 คาแรคเตอร์มัทฉะที่คุณต้องลอง\nUji Hikari • Saemidori • Yabukita • Tsuyuhikari • Okumidori\nปรุงสดใหม่แก้วต่อแก้วเพื่อรสชาติที่ดีที่สุด`}
+            {/* Subtitle Description */}
+            <p class="text-base sm:text-lg text-shamrock-100/90 font-sarabun font-light leading-relaxed max-w-xl text-balance">
+              สัมผัสมัทฉะแท้เกรดพิธีการ (Ceremonial Grade) คัดสรรจากแหล่งปลูกชั้นนำทั่วญี่ปุ่น ชงสดด้วยความพิถีพิถันทุกแก้ว พร้อมให้บริการแล้ววันนี้ที่กรุงเทพฯ (เสนานิคม) และสาขาใหม่ที่โคราช
             </p>
 
             {/* CTA Buttons */}
-            <div class="flex flex-col sm:flex-row flex-wrap gap-4 pt-4">
+            <div class="flex flex-col sm:flex-row flex-wrap gap-3.5 w-full sm:w-auto pt-2">
               <OrderButton
-                className="bg-shamrock-200 hover:bg-shamrock-100 text-shamrock-900 px-8 py-4 text-lg font-bold rounded-full transition-all duration-300 shadow-lg shadow-shamrock-900/20 hover:shadow-xl hover:shadow-shamrock-900/30 hover:scale-105"
+                className="w-full sm:w-auto bg-shamrock-200 hover:bg-shamrock-100 text-shamrock-950 px-8 py-3.5 text-base font-bold rounded-2xl transition-all duration-300 shadow-lg shadow-shamrock-900/30 hover:shadow-xl hover:shadow-shamrock-900/40 hover:scale-[1.02] cursor-pointer"
                 client:only="react"
               >
-                Order now
+                สั่งเดลิเวอรี (Order Now)
               </OrderButton>
               <a 
-                href="#contact" 
-                class="inline-flex items-center justify-center gap-2 bg-shamrock-800/30 hover:bg-shamrock-800/50 backdrop-blur-sm border-2 border-shamrock-300/50 hover:border-shamrock-300 text-shamrock-50 px-8 py-4 text-lg rounded-full font-medium transition-all duration-300"
+                href="#menu" 
+                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 hover:border-shamrock-300/50 text-white px-6 py-3.5 text-base rounded-2xl font-medium transition-all duration-300 font-sarabun"
               >
-                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                <span>สำรวจเมนูมัทฉะ</span>
+                <svg class="h-4 w-4 text-shamrock-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
-                หน้าร้าน
               </a>
             </div>
+
+            {/* Trust Anchor Metrics */}
+            <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/10 w-full max-w-lg">
+              <div>
+                <p class="font-poppins text-lg sm:text-xl font-bold text-shamrock-200">100%</p>
+                <p class="text-[11px] sm:text-xs text-shamrock-300/80 font-sarabun">Ceremonial Grade</p>
+              </div>
+              <div>
+                <p class="font-poppins text-lg sm:text-xl font-bold text-shamrock-200">2 สาขา</p>
+                <p class="text-[11px] sm:text-xs text-shamrock-300/80 font-sarabun">กรุงเทพฯ &amp; โคราช</p>
+              </div>
+              <div>
+                <p class="font-poppins text-lg sm:text-xl font-bold text-shamrock-200">Fresh Whisked</p>
+                <p class="text-[11px] sm:text-xs text-shamrock-300/80 font-sarabun">ชงสดตามออเดอร์</p>
+              </div>
+            </div>
+
           </div>
 
-          {/* Image Side */}
-          <div class="flex-1 flex items-center justify-center h-full">
-            {
-              content.heroSection.heroImage && (
-                <div class="relative w-full h-full min-h-100 overflow-hidden">
-                  <Image
-                    src={content.heroSection.heroImage.responsiveImage.src}
-                    alt="Matcha Hero"
-                    class="h-full w-full object-cover"
-                    width={640}
-                    height={content.heroSection.heroImage.responsiveImage.height}
-                  />
-                </div>
-              )
-            }
+          {/* Right Interactive Branch & Storefront Showcase */}
+          <div class="lg:col-span-6 flex items-center justify-center w-full">
+            <HeroBranchShowcase client:load />
           </div>
-          
+
         </div>
       </div>
 
-      {/* Wave divider */}
-      <div class="absolute bottom-0 left-0 right-0">
-        <svg class="w-full h-12 sm:h-16 lg:h-20 text-shamrock-50" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      {/* Elegant Wave divider */}
+      <div class="absolute bottom-0 left-0 right-0 pointer-events-none">
+        <svg class="w-full h-10 sm:h-14 lg:h-18 text-shamrock-50" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
           <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="currentColor"/>
         </svg>
       </div>
@@ -145,33 +140,132 @@ const blendFeaturedId = featuredId(blendMenus)
                 สัมผัสรสชาติอันเป็นเอกลักษณ์ของมัทฉะสายพันธุ์เดี่ยว ที่ผ่านการคัดสรรอย่างพิถีพิถันจากแหล่งเพาะปลูกชั้นยอด
             </p>
         </div>
-        <div class="grid grid-cols-1 gap-6 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:auto-rows-[1fr]">
-            {singleMenus.map((product) => (
-              <ProductItem product={product} featured={product.id === singleFeaturedId} />
-            ))}
-        </div>
+        <JapanCultivarMap cultivars={cultivars} client:load />
       </div>
     </section>
 
     {/* Blend Section */}
-    <section class="py-12 lg:py-24 bg-white relative z-10">
+    <section class="relative z-10 overflow-hidden bg-white py-14 lg:py-20">
+      <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid items-start gap-12 lg:grid-cols-[minmax(280px,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
+          <div class="lg:sticky lg:top-10">
+            <div class="relative overflow-hidden rounded-[1rem] bg-shamrock-950 shadow-2xl shadow-shamrock-950/15">
+              <img
+                src={blendImage.src}
+                alt="A bamboo chasen whisking bright green matcha"
+                class="aspect-[4/5] w-full object-cover"
+                loading="lazy"
+              />
+              <div class="absolute inset-x-0 bottom-0 bg-linear-to-t from-shamrock-950/90 via-shamrock-950/20 to-transparent p-6 pt-24 text-white sm:p-8 sm:pt-32">
+                <p class="font-poppins text-xs font-semibold uppercase tracking-[0.18em] text-shamrock-200">
+                  RYUU Signature House Blend
+                </p>
+                <p class="mt-2 max-w-xs font-sarabun text-lg leading-relaxed text-white/90">
+                  สูตรเฉพาะของเรา ผสมให้ได้ความกลมกล่อมในทุกแก้ว
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="mb-8 max-w-2xl">
+              <p class="font-poppins text-sm font-semibold uppercase tracking-[0.16em] text-shamrock-700">
+                Perfect harmony
+              </p>
+              <h2 class="mt-3 font-esteban text-3xl font-bold leading-tight text-gray-950 lg:text-4xl">
+                House Blends
+              </h2>
+              <p class="mt-4 max-w-xl font-sarabun text-lg leading-relaxed text-gray-600">
+                การผสมผสานมัทฉะหลากหลายสายพันธุ์อย่างลงตัว เพื่อให้ได้รสชาติและกลิ่นสัมผัสที่ซับซ้อนและน่าจดจำ
+              </p>
+            </div>
+
+            <ul class="divide-y divide-gray-300/80 border-y border-gray-300/80">
+              {blends.map((blend, index) => (
+                <li class="py-5 sm:py-6">
+                  <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+                    <div class="min-w-0">
+                      <div class="flex flex-wrap items-center gap-2.5">
+                        <span class="font-poppins text-xs font-semibold tabular-nums text-shamrock-700">
+                          0{index + 1}
+                        </span>
+                        <h3 class="font-poppins text-lg font-bold text-gray-950 sm:text-xl">
+                          {blend.name}
+                        </h3>
+                        {blend.servingPrices.clear == null && blend.servingPrices.latte == null ? (
+                          <span class="rounded-full bg-gray-900 px-2.5 py-1 font-poppins text-[10px] font-bold uppercase tracking-wide text-white">
+                            Coming soon
+                          </span>
+                        ) : (
+                          <>
+                            {blend.bestSeller && (
+                              <span class="rounded-full bg-amber-100 px-2.5 py-1 font-poppins text-[10px] font-bold uppercase tracking-wide text-amber-800">
+                                Best seller
+                              </span>
+                            )}
+                            {blend.recommended && (
+                              <span class="rounded-full bg-shamrock-100 px-2.5 py-1 font-poppins text-[10px] font-bold uppercase tracking-wide text-shamrock-800">
+                                Recommended
+                              </span>
+                            )}
+                          </>
+                        )}
+                      </div>
+                      <p class="mt-1.5 max-w-2xl font-sarabun text-sm leading-relaxed text-gray-600 sm:text-base">
+                        {blend.concept}
+                      </p>
+                      <div class="mt-3 flex flex-wrap gap-1.5">
+                        {blend.tasteNote.split(',').map((note) => (
+                          <span class="rounded-full border border-shamrock-200 bg-shamrock-50 px-2.5 py-0.5 font-poppins text-[11px] font-medium uppercase tracking-wide text-shamrock-800">
+                            {note.trim()}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div class="flex shrink-0 items-center gap-3 border-t border-gray-300/70 pt-3 sm:min-w-40 sm:flex-col sm:items-end sm:gap-0.5 sm:border-0 sm:pt-1">
+                      <span class="font-poppins text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-500">
+                        Serving price
+                      </span>
+                      <div class="flex items-baseline gap-2.5 font-poppins">
+                        <span class="text-sm font-bold text-shamrock-800 sm:text-base">
+                          {blend.servingPrices.clear == null ? '-' : `฿${blend.servingPrices.clear}`}
+                          <small class="ml-1 text-[11px] font-medium text-gray-500">clear</small>
+                        </span>
+                        <span class="text-sm font-bold text-shamrock-800 sm:text-base">
+                          {blend.servingPrices.latte == null ? '-' : `฿${blend.servingPrices.latte}`}
+                          <small class="ml-1 text-[11px] font-medium text-gray-500">latte</small>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Fusion & Fancy Section */}
+    <section class="py-12 lg:py-24 bg-shamrock-50 relative z-10">
       <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="mb-12 lg:mb-16 text-center">
             <div class="inline-flex items-center gap-2">
               <span class="h-px w-8 bg-shamrock-400"></span>
-              <span class="text-shamrock-600 font-medium text-sm">Perfect Harmony</span>
+              <span class="text-shamrock-600 font-medium text-sm">Playful Creations</span>
               <span class="h-px w-8 bg-shamrock-400"></span>
             </div>
             <h2 class="mt-3 text-3xl font-bold text-gray-900 lg:text-4xl font-esteban">
-                House Blends
+                Fusion &amp; Fancy
             </h2>
             <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto font-sarabun">
-                การผสมผสานมัทฉะหลากหลายสายพันธุ์อย่างลงตัว เพื่อให้ได้รสชาติและกลิ่นสัมผัสที่ซับซ้อนและน่าจดจำ
+                เมนูมัทฉะสร้างสรรค์ ผสมผสานวัตถุดิบและรสชาติที่ไม่เหมือนใคร พร้อมเสิร์ฟ
             </p>
         </div>
         <ul class="grid grid-cols-1 gap-6 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:auto-rows-[1fr]">
-            {blendMenus.map((product) => (
-              <ProductItem product={product} featured={product.id === blendFeaturedId} />
+            {fusions.map((fusion) => (
+              <ProductItem product={fusion} featured={fusion.id === fusionFeaturedId} />
             ))}
         </ul>
       </div>

@@ -14,19 +14,34 @@ const version = import.meta.env.npm_package_version || '1.6.2'
           <h2 class="mb-3 font-poppins text-2xl font-bold text-shamrock-200">RYUU Cafe <span class="text-lg">りゅう</span></h2>
           <div class="h-1 w-16 rounded-full bg-shamrock-400"></div>
         </div>
-        <div class="space-y-3 text-sm font-sarabun text-shamrock-100/90 leading-relaxed">
-          <p class="flex items-start gap-2">
-            <svg class="mt-0.5 h-5 w-5 shrink-0 text-shamrock-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <span>
-              Block Space 34, 1546 ซอยพหลโยธิน 34<br />
-              แขวงเสนานิคม เขตจตุจักร กรุงเทพฯ
-            </span>
-          </p>
+        <div class="space-y-4 text-sm font-sarabun text-shamrock-100/90 leading-relaxed">
+          {/* Bangkok Branch */}
+          <div class="space-y-1.5">
+            <p class="font-bold text-shamrock-200 text-xs uppercase tracking-wider font-poppins flex items-center gap-1.5">
+              <span>📍 สาขาเสนานิคม (กรุงเทพฯ)</span>
+              <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded font-medium">เปิดบริการ</span>
+            </p>
+            <p class="flex items-start gap-2 text-xs text-shamrock-100/80">
+              <span>
+                Block Space 34, 1546 ซอยพหลโยธิน 34<br />
+                แขวงเสนานิคม เขตจตุจักร กรุงเทพฯ (08:30 - 17:30 น.)
+              </span>
+            </p>
+          </div>
+
+          {/* Korat Branch */}
+          <div class="space-y-1.5 pt-3 border-t border-shamrock-700/60">
+            <p class="font-bold text-shamrock-200 text-xs uppercase tracking-wider font-poppins flex items-center gap-1.5">
+              <span>📍 สาขาโคราช (นครราชสีมา)</span>
+              <span class="text-[10px] bg-amber-400/20 text-amber-200 px-1.5 py-0.5 rounded font-medium">เร็วๆ นี้</span>
+            </p>
+            <p class="text-xs text-shamrock-200/70">
+              อำเภอเมือง จังหวัดนครราชสีมา (Coming Soon)
+            </p>
+          </div>
+
           <p class="mt-6 border-t border-shamrock-700 pt-4 text-xs text-shamrock-200/70">
-            © 2024 ryuucafe.com. All rights reserved.
+            © 2024–2026 ryuucafe.com. All rights reserved.
           </p>
           <p class="text-xs text-shamrock-400/60">v{version}</p>
         </div>

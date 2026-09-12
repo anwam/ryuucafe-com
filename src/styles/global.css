@@ -69,6 +69,47 @@
   --font-family-sarabun: var(--font-sarabun);
 }
 
+/* Korat Branch Theme: Warm Dark Wooden Tone (Kissaten / Smoked Oak / Amber Warmth) */
+html[data-branch="korat"] {
+  --color-shamrock-50: oklch(97.2% 0.015 65);
+  --color-shamrock-100: oklch(93.8% 0.026 60);
+  --color-shamrock-200: oklch(87.5% 0.046 58);
+  --color-shamrock-300: oklch(79.5% 0.068 55);
+  --color-shamrock-400: oklch(70.5% 0.082 50);
+  --color-shamrock-500: oklch(60.2% 0.092 46);
+  --color-shamrock-600: oklch(50.0% 0.082 43);
+  --color-shamrock-700: oklch(40.2% 0.066 40);
+  --color-shamrock-800: oklch(30.8% 0.050 38);
+  --color-shamrock-900: oklch(21.2% 0.035 36);
+  --color-shamrock-950: oklch(15.8% 0.022 34);
+
+  --color-malachite-50: oklch(98.0% 0.020 75);
+  --color-malachite-100: oklch(94.5% 0.045 72);
+  --color-malachite-200: oklch(89.5% 0.080 70);
+  --color-malachite-300: oklch(82.5% 0.120 68);
+  --color-malachite-400: oklch(75.5% 0.150 65);
+  --color-malachite-500: oklch(68.5% 0.160 62);
+  --color-malachite-600: oklch(58.5% 0.140 58);
+  --color-malachite-700: oklch(48.5% 0.110 54);
+  --color-malachite-800: oklch(38.5% 0.080 50);
+  --color-malachite-900: oklch(26.0% 0.050 45);
+  --color-malachite-950: oklch(18.0% 0.030 40);
+
+  --color-primary: var(--color-malachite-500);
+}
+
+/* Smooth theme transitions */
+html {
+  transition: color 400ms cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header, section, footer, article, nav, .btn {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

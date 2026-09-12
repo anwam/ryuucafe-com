@@ -1,8 +1,10 @@
 import type { PageContent } from '@/domain/home/types'
-import type { Product } from '@/domain/product/types'
+import type { Blend, Cultivar, FusionProduct } from '@/domain/product/types'
 
 export interface HomeData {
-  allProducts: Product[]
+  allCultivars: Cultivar[]
+  allBlends: Blend[]
+  allFusions: FusionProduct[]
   pageContent: PageContent
 }
 

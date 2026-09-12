@@ -1,51 +1,70 @@
-export type ResponsiveImage = {
-  src: string
-  srcSet: string
-  sizes: string
-  width: number
-  height: number
-}
-
 export type CoverImage = {
   blurhash: string
   thumbhash: string
-  responsiveImage: ResponsiveImage
+  responsiveImage: {
+    src: string
+    srcSet: string
+    sizes: string
+    width: number
+    height: number
+  }
 }
 
-/** Per-serving prices. `null` means the serving is not offered yet (coming soon). */
+/** Static serving prices shown as tags (e.g. "Clear: ฿170 | Latte: ฿200") */
 export type ServingPrices = {
-  clear: number | null
-  latte: number | null
+  clear?: number | null
+  latte?: number | null
 }
 
-/** A single-cultivar matcha, tied to its Japanese prefecture of origin. */
+/** Section 1: Single Cultivar (Ceremonial Grade) — selected via an interactive Japan map */
 export type Cultivar = {
   id: string
   name: string
-  /** Matches the `id` property of a feature in `/data/japan-prefectures.topojson`. */
-  prefectureId: string
-  prefecture: string
+  /** City or terroir town, e.g. "Uji", "Yame", "Nishio", "Mori", "Chiran", "Ise" */
   city?: string
+  /** Region name in Japan, e.g. "Kansai", "Kyushu", "Chubu" */
   region?: string
-  /** Comma-separated notes, split for display. */
+  /** Prefecture display name, e.g. "Kyoto" */
+  prefecture: string
+  /** JIS prefecture code matching the Japan topojson `properties.id`, e.g. "26" */
+  prefectureId: string
   tasteNotes: string
   priceClear: number | null
   priceLatte: number | null
 }
 
-export type Product = {
+/** Section 2: House Blends — same card layout as Cultivar */
+export type Blend = {
   available: boolean
-  description: string
   id: string
   name: string
-  onSale: boolean
-  onlyDelivery: boolean
-  price: number
-  salePrice: number
+  /** City or terroir town if single-origin blend */
+  city?: string
+  /** Region name */
+  region?: string
+  /** Prefecture display name */
+  prefecture?: string
+  /** JIS prefecture code */
+  prefectureId?: string
+  concept: string
+  tasteNote: string
   bestSeller?: boolean
-  shelfOrder?: number
-  powderType?: boolean
-  tasteNote?: string
   recommended?: boolean
+  shelfOrder?: number
+  servingPrices: ServingPrices
+  coverImage: CoverImage
+}
+
+/** Section 3: Fusion & Fancy — standard ready-to-drink product card */
+export type FusionProduct = {
+  available: boolean
+  description?: string
+  id: string
+  name: string
+  onlyDelivery: boolean
+  price: number | null
+  bestSeller?: boolean
+  recommended?: boolean
+  shelfOrder?: number
   coverImage: CoverImage
 }
